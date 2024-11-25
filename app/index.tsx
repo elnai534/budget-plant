@@ -3,6 +3,7 @@ import Taskbar from "./components/Taskbar";
 import ScrollableHistory from "./components/History";
 import PlantImage from "./components/Plant";
 import TopHotbar from "./components/TopHotbar"
+import TotalDisplay from "./components/TotalDisplay"
 
 export default function Index() {
   return (
@@ -10,6 +11,7 @@ export default function Index() {
       <View style={styles.frame}>
         <Taskbar />
         <ScrollableHistory/>
+        <TotalDisplay/>
         <PlantImage/>
         <TopHotbar/>
       </View>
