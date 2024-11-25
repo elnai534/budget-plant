@@ -1,15 +1,40 @@
-import { Text, View } from "react-native";
+import { Text, View, StyleSheet, Image } from "react-native";
+import Taskbar from "./components/Taskbar";
+import ScrollableHistory from "./components/History";
+import PlantImage from "./components/Plant";
+import Logo from "./components/Logo"
 
 export default function Index() {
   return (
-    <View
-      style={{
-        flex: 1,
-        justifyContent: "center",
-        alignItems: "center",
-      }}
-    >
-      <Text>Edit app/index.tsx to edit this screen.</Text>
+    <View style={styles.container}>
+      <View style={styles.frame}>
+        <Taskbar />
+        <ScrollableHistory/>
+        <PlantImage/>
+        <Logo/>
+      </View>
     </View>
   );
 }
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    alignItems: "center",
+    borderColor: "#000000",
+    width: 720,
+    height: 1280,
+    margin: "auto"
+  },
+
+  frame: {
+    width:720,
+    height: 1280,
+    backgroundColor: "#3E364A",
+    borderWidth: 1,
+    borderColor: "#FFFFFF",
+    borderRadius: 10,
+    alignItems: "center",
+    flexDirection: "column-reverse"
+  }
+})
