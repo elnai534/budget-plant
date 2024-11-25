@@ -9,7 +9,7 @@ const NewEntry = () => {
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
 
-    // Example logic to handle the submission (replace with your logic)
+    
     const newEntry = {
       title,
       amount: parseFloat(amount),
