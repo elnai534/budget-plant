@@ -47,11 +47,11 @@ const styles = {
     padding: "30px",
     border: "5px solid #f5eed5",
     borderRadius: "15px",
-    textAlign: "center",
+    textAlign: "center", // Center all text inside the popup
     fontFamily: "'Press Start 2P', cursive",
     color: "#f5eed5",
     boxShadow: "0 4px 6px rgba(0, 0, 0, 0.2)",
-    width: "300px",
+    width: "400px",
     maxWidth: "90%",
   },
   profilePicture: {
@@ -66,7 +66,7 @@ const styles = {
     fontSize: "24px",
   },
   details: {
-    textAlign: "left",
+    textAlign: "center", // Ensure text in details is also centered
     marginBottom: "20px",
     fontSize: "18px",
     lineHeight: "1.5",
