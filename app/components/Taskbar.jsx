@@ -5,33 +5,55 @@ const Taskbar = () => {
   const [isProfileOpen, setIsProfileOpen] = useState(false);
   const [isNewEntryOpen, setIsNewEntryOpen] = useState(false);
 
-  const toggleHistoryPopup = () => setIsHistoryOpen(!isHistoryOpen);
-  const toggleProfilePopup = () => setIsProfileOpen(!isProfileOpen);
-  const toggleNewEntryPopup = () => setIsNewEntryOpen(!isNewEntryOpen);
+  // Example profile details
+  const profileDetails = {
+    name: "John Doe",
+    email: "john.doe@example.com",
+    joined: "January 2024",
+    profilePicture: "https://cdn4.iconfinder.com/data/icons/rounded-black-basic-ui/139/Profile01-RoundedBlack-512.png", 
+  };
+
+  const toggleHistoryPopup = () => {
+    setIsHistoryOpen(!isHistoryOpen);
+    setIsProfileOpen(false); // Close other popups
+    setIsNewEntryOpen(false);
+  };
+
+  const toggleProfilePopup = () => {
+    setIsProfileOpen(!isProfileOpen);
+    setIsHistoryOpen(false); // Close other popups
+    setIsNewEntryOpen(false);
+  };
+
+  const toggleNewEntryPopup = () => {
+    setIsNewEntryOpen(!isNewEntryOpen);
+    setIsProfileOpen(false); // Close other popups
+    setIsHistoryOpen(false);
+  };
 
   return (
     <div
       style={{
         display: "flex",
-        justifyContent: "space-between",
+        justifyContent: "space-around",
         alignItems: "center",
-        backgroundColor: "#9083A5",
         padding: "10px",
+        backgroundColor: "#9083A5",
         borderRadius: "10px",
-        height: "60px",
+        marginTop: "10px",
       }}
     >
       {/* History Button */}
       <button
         style={{
           flex: 1,
-          backgroundColor: "#FCB761",
-          border: "2px solid #9083A5",
           margin: "5px",
           padding: "10px",
+          backgroundColor: "#FCB761",
           borderRadius: "5px",
           color: "white",
           fontFamily: "'Press Start 2P', cursive",
+          border: "none",
           cursor: "pointer",
         }}
         onClick={toggleHistoryPopup}
@@ -43,13 +65,13 @@ const Taskbar = () => {
       <button
         style={{
           flex: 1,
-          backgroundColor: "#FCB761",
-          border: "2px solid #9083A5",
           margin: "5px",
           padding: "10px",
+          backgroundColor: "#FCB761",
           borderRadius: "5px",
           color: "white",
           fontFamily: "'Press Start 2P', cursive",
+          border: "none",
           cursor: "pointer",
         }}
         onClick={toggleNewEntryPopup}
@@ -61,13 +83,13 @@ const Taskbar = () => {
       <button
         style={{
           flex: 1,
-          backgroundColor: "#FCB761",
-          border: "2px solid #9083A5",
           margin: "5px",
           padding: "10px",
+          backgroundColor: "#FCB761",
           borderRadius: "5px",
           color: "white",
           fontFamily: "'Press Start 2P', cursive",
+          border: "none",
           cursor: "pointer",
         }}
         onClick={toggleProfilePopup}
@@ -96,7 +118,7 @@ const Taskbar = () => {
               backgroundColor: "#F7F0C1",
               padding: "20px",
               border: "5px solid #9083A5",
-              borderRadius: "10px",
+              borderRadius: "15px",
               textAlign: "center",
               fontFamily: "'Press Start 2P', cursive",
               color: "#000",
@@ -144,7 +166,7 @@ const Taskbar = () => {
               backgroundColor: "#F7F0C1",
               padding: "20px",
               border: "5px solid #9083A5",
-              borderRadius: "10px",
+              borderRadius: "15px",
               textAlign: "center",
               fontFamily: "'Press Start 2P', cursive",
               color: "#000",
@@ -171,7 +193,7 @@ const Taskbar = () => {
         </div>
       )}
 
-      {/* Profile Popup */}
+      {/* Profile Popup with Matching Border */}
       {isProfileOpen && (
         <div
           style={{
@@ -191,15 +213,48 @@ const Taskbar = () => {
             style={{
               backgroundColor: "#F7F0C1",
               padding: "20px",
-              border: "5px solid #9083A5",
-              borderRadius: "10px",
+              border: "5px solid #9083A5", // Matching border
+              borderRadius: "15px",
               textAlign: "center",
               fontFamily: "'Press Start 2P', cursive",
               color: "#000",
               boxShadow: "0 4px 6px rgba(0, 0, 0, 0.2)",
             }}
           >
-            <p>Profile clicked!</p>
+            {/* Profile Picture */}
+            <img
+              src={profileDetails.profilePicture}
+              alt="Profile"
+              style={{
+                width: "100px",
+                height: "100px",
+                borderRadius: "50%",
+                marginBottom: "20px",
+                border: "3px solid #9083A5",
+              }}
+            />
+
+            {/* Profile Details */}
+            <h2 style={{ marginBottom: "20px", color: "#000" }}>Profile</h2>
+            <div
+              style={{
+                marginBottom: "20px",
+                color: "#000",
+                textAlign: "center",
+              }}
+            >
+              <p>
+                <strong>Name:</strong> {profileDetails.name}
+              </p>
+              <p>
+                <strong>Email:</strong> {profileDetails.email}
+              </p>
+              <p>
+                <strong>Joined:</strong> {profileDetails.joined}
+              </p>
+            </div>
+
+            {/* Close Button */}
             <button
               style={{
                 backgroundColor: "#AFE593",
