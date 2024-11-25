@@ -21,7 +21,7 @@ const styles = StyleSheet.create({
         fontFamily: "VT323, serif",
         fontSize: 96,
         fontWeight: "strong",
-        color: "white",
+        color: "#f5eed5",
     },
     cogwheel: {
         width: 100,

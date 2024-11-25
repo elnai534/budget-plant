@@ -44,7 +44,7 @@ const styles = StyleSheet.create({
     borderRadius: 15,
     padding: 10,
     borderWidth: 3,
-    borderColor: "#ddd",
+    borderColor: "#f5eed5",
   },
   record: {
     padding: 15,
@@ -53,7 +53,7 @@ const styles = StyleSheet.create({
   },
   recordTitle: {
     fontSize: 24,
-    color: "#FFFFFF",
+    color: "#f5eed5",
     fontFamily: "VT323, serif",
   },
   recordAmount: {

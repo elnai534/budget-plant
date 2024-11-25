@@ -24,7 +24,7 @@ const styles = StyleSheet.create({
   },
   text: {
     fontSize: 64,
-    color: "#FFFFFF",
+    color: "#f5eed5",
     fontFamily: "VT323, serif",
   },
 });
