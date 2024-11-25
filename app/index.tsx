@@ -2,7 +2,7 @@ import { Text, View, StyleSheet, Image } from "react-native";
 import Taskbar from "./components/Taskbar";
 import ScrollableHistory from "./components/History";
 import PlantImage from "./components/Plant";
-import Logo from "./components/Logo"
+import TopHotbar from "./components/TopHotbar"
 
 export default function Index() {
   return (
@@ -11,7 +11,7 @@ export default function Index() {
         <Taskbar />
         <ScrollableHistory/>
         <PlantImage/>
-        <Logo/>
+        <TopHotbar/>
       </View>
     </View>
   );
