@@ -115,14 +115,17 @@ const Taskbar = () => {
         >
           <div
             style={{
-              backgroundColor: "#F7F0C1",
-              padding: "20px",
-              border: "5px solid #9083A5",
+              backgroundColor: "#3E364A",
+              padding: "30px",
+              border: "5px solid #f5eed5",
               borderRadius: "15px",
               textAlign: "center",
               fontFamily: "'Press Start 2P', cursive",
-              color: "#000",
+              color: "#f5eed5",
               boxShadow: "0 4px 6px rgba(0, 0, 0, 0.2)",
+              width: "200px", 
+              height: "200px",
+              fontSize: "22px",
             }}
           >
             <p>History clicked!</p>
@@ -130,12 +133,13 @@ const Taskbar = () => {
               style={{
                 backgroundColor: "#AFE593",
                 border: "2px solid #9083A5",
-                padding: "10px 15px",
+                padding: "10px 25px",
                 borderRadius: "5px",
                 fontFamily: "'Press Start 2P', cursive",
                 color: "#FFFDED",
                 cursor: "pointer",
-                marginTop: "10px",
+                marginTop: "40px",
+                fontSize: "24px",
               }}
               onClick={toggleHistoryPopup}
             >
@@ -163,14 +167,17 @@ const Taskbar = () => {
         >
           <div
             style={{
-              backgroundColor: "#F7F0C1",
-              padding: "20px",
-              border: "5px solid #9083A5",
+              backgroundColor: "#3E364A",
+              padding: "30px",
+              border: "5px solid #f5eed5",
               borderRadius: "15px",
               textAlign: "center",
               fontFamily: "'Press Start 2P', cursive",
-              color: "#000",
+              color: "#f5eed5",
               boxShadow: "0 4px 6px rgba(0, 0, 0, 0.2)",
+              width: "200px", 
+              height: "200px",
+              fontSize: "22px",
             }}
           >
             <p>New Entry clicked!</p>
@@ -178,12 +185,13 @@ const Taskbar = () => {
               style={{
                 backgroundColor: "#AFE593",
                 border: "2px solid #9083A5",
-                padding: "10px 15px",
+                padding: "10px 25px",
                 borderRadius: "5px",
                 fontFamily: "'Press Start 2P', cursive",
                 color: "#FFFDED",
                 cursor: "pointer",
-                marginTop: "10px",
+                marginTop: "40px",
+                fontSize: "24px",
               }}
               onClick={toggleNewEntryPopup}
             >
@@ -211,14 +219,16 @@ const Taskbar = () => {
         >
           <div
             style={{
-              backgroundColor: "#F7F0C1",
+              backgroundColor: "#3E364A",
               padding: "20px",
-              border: "5px solid #9083A5", // Matching border
+              border: "5px solid #f5eed5", // Matching border
               borderRadius: "15px",
               textAlign: "center",
               fontFamily: "'Press Start 2P', cursive",
-              color: "#000",
+              color: "#f5eed5",
               boxShadow: "0 4px 6px rgba(0, 0, 0, 0.2)",
+              width: "500px", 
+              height: "500px",
             }}
           >
             {/* Profile Picture */}
@@ -235,12 +245,13 @@ const Taskbar = () => {
             />
 
             {/* Profile Details */}
-            <h2 style={{ marginBottom: "20px", color: "#000" }}>Profile</h2>
+            <h2 style={{ marginBottom: "20px", color: "#f5eed5" }}>Profile</h2>
             <div
               style={{
-                marginBottom: "20px",
-                color: "#000",
+                marginBottom: "50px",
+                color: "#f5eed5",
                 textAlign: "center",
+                fontSize: "22px",
               }}
             >
               <p>
@@ -259,12 +270,13 @@ const Taskbar = () => {
               style={{
                 backgroundColor: "#AFE593",
                 border: "2px solid #9083A5",
-                padding: "10px 15px",
+                padding: "18px 35px",
                 borderRadius: "5px",
                 fontFamily: "'Press Start 2P', cursive",
                 color: "#FFFDED",
                 cursor: "pointer",
                 marginTop: "10px",
+                fontSize: "22px",
               }}
               onClick={toggleProfilePopup}
             >
