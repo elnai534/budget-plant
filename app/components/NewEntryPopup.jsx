@@ -34,81 +34,48 @@ const NewEntryPopup = ({ isOpen, onClose, addRecord }) => {
   if (!isOpen) return null;
 
   return (
-    <div
-      style={{
-        position: "fixed",
-        top: 0,
-        left: 0,
-        width: "100%",
-        height: "100%",
-        backgroundColor: "rgba(0, 0, 0, 0.8)",
-        display: "flex",
-        justifyContent: "center",
-        alignItems: "center",
-        zIndex: 1000,
-      }}
-    >
-      <div
-        style={{
-          backgroundColor: "#3E364A",
-          padding: "30px",
-          border: "5px solid #9083A5",
-          borderRadius: "15px",
-          fontFamily: "'Press Start 2P', cursive",
-          boxShadow: "0 4px 6px rgba(0, 0, 0, 0.2)",
-          width: "600px",
-          maxWidth: "90%",
-          boxSizing: "border-box", // Ensure proper box-sizing
-        }}
-      >
-        <h2 style={{ marginBottom: "20px", textAlign: "center", color: "#000" }}>New Entry</h2>
-        <div style={styles.form}>
-          {/* Title Input */}
-          <div style={styles.inputGroup}>
-            <label style={styles.label}>Title:</label>
+    <div style={styles.popupOverlay}>
+      <div style={styles.popupContent}>
+        <h2 style={styles.header}>New Entry</h2>
+        <div style={styles.formSection}>
+          <label style={styles.label}>
+            Title:
             <input
               type="text"
               value={title}
               onChange={(e) => setTitle(e.target.value)}
-              style={styles.input}
+              style={styles.inputField}
             />
-          </div>
-
-          {/* Amount Input */}
-          <div style={styles.inputGroup}>
-            <label style={styles.label}>Amount:</label>
+          </label>
+          <label style={styles.label}>
+            Amount:
             <input
               type="number"
               value={amount}
               onChange={(e) => setAmount(e.target.value)}
-              style={styles.input}
+              style={styles.inputField}
             />
-          </div>
-
-          {/* Category Input */}
-          <div style={styles.inputGroup}>
-            <label style={styles.label}>Category:</label>
+          </label>
+          <label style={styles.label}>
+            Category:
             <input
               type="text"
               value={category}
               onChange={(e) => setCategory(e.target.value)}
-              style={styles.input}
+              style={styles.inputField}
             />
-          </div>
-
-          {/* Description Input */}
-          <div style={styles.inputGroup}>
-            <label style={styles.label}>Description:</label>
+          </label>
+          <label style={styles.label}>
+            Description:
             <textarea
               rows="4"
               value={description}
               onChange={(e) => setDescription(e.target.value)}
-              style={{ ...styles.input, height: "60px", resize: "none" }}
+              style={styles.textareaField}
             ></textarea>
+            </label>
           </div>
-        </div>
-
-        <div style={{ marginTop: "20px", textAlign: "center" }}>
+          <div style={styles.buttonContainer}>
           <button style={styles.addButton} onClick={handleAddRecord}>
             Add
           </button>
@@ -116,40 +83,73 @@ const NewEntryPopup = ({ isOpen, onClose, addRecord }) => {
             Close
           </button>
         </div>
-      </div>
+        </div>
     </div>
   );
 };
 
 const styles = {
-  form: {
-    display: "flex",
-    flexDirection: "column", 
-    alignItems: "center", 
-    gap: "20px", 
-  },
-  inputGroup: {
-    display: "flex",
-    flexDirection: "column", 
-    alignItems: "flex-start", 
+  popupOverlay: {
+    position: "fixed",
+    top: 0,
+    left: 0,
     width: "100%",
+    height: "100%",
+    backgroundColor: "rgba(0, 0, 0, 0.8)",
+    display: "flex",
+    justifyContent: "center",
+    alignItems: "center",
+    zIndex: 1000,
+  },
+  popupContent: {
+    backgroundColor: "#3E364A",
+    padding: "20px",
+    border: "5px solid #9083A5",
+    borderRadius: "15px",
+    textAlign: "center",
+    fontFamily: "'Press Start 2P', cursive",
+    width: 500,
+    color: "#000",
+    boxShadow: "0 4px 6px rgba(0, 0, 0, 0.2)",
+  },
+  header: {
+    marginBottom: "20px",
+    color: "#fff",
+  },
+  formSection: {
+    marginTop: "20px",
+    textAlign: "left",
   },
   label: {
-    fontWeight: "bold",
-    color: "#000", 
-    marginBottom: "5px",
-    textAlign: "left",
-    width: "100%",
+    display: "block",
+    marginBottom: "10px",
+    color: "#fff",
   },
-  input: {
-    width: "100%", 
-    maxWidth: "500px", 
+  inputField: {
+    display: "block",
+    width: "100%",
     padding: "8px",
+    width: "480px",
+    marginTop: "5px",
     borderRadius: "5px",
     border: "2px solid #9083A5",
     fontFamily: "'Press Start 2P', cursive",
-    backgroundColor: "#FFF",
+    backgroundColor: "#fff",
     color: "#000",
+  },
+  textareaField: {
+    display: "block",
+    width: "480px",
+    padding: "8px",
+    marginTop: "5px",
+    borderRadius: "5px",
+    border: "2px solid #9083A5",
+    fontFamily: "'Press Start 2P', cursive",
+    backgroundColor: "#fff",
+    color: "#000",
+  },
+  buttonContainer: {
+    marginTop: "20px",
   },
   addButton: {
     backgroundColor: "#AFE593",
