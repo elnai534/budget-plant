@@ -125,11 +125,14 @@ const styles = StyleSheet.create({
         fontWeight: "bold",
         color: "#f5eed5",
         marginBottom: 20,
+        fontFamily: "'Press Start 2P', cursive",
     },
     sidebarItem: {
-        fontSize: 18,
+        fontSize: 20,
         color: "#f5eed5",
+        fontWeight: "bold",
         marginBottom: 10,
+        fontFamily: "'Press Start 2P', cursive",
     },
     closeButton: {
         position: "absolute",
@@ -144,6 +147,7 @@ const styles = StyleSheet.create({
         flexDirection: "row",
         justifyContent: "space-around",
         marginBottom: 20,
+        
     },
     navButton: {
         backgroundColor: "#4f455e",
@@ -155,8 +159,9 @@ const styles = StyleSheet.create({
     },
     navButtonText: {
         color: "#f5eed5",
-        fontSize: 16,
+        fontSize: 18,
         fontWeight: "bold",
+        fontFamily: "'Press Start 2P', cursive",
     },
 });
 
