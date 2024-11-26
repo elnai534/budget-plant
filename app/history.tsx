@@ -1,11 +1,12 @@
 import React from "react";
+import ScrollableHistory from "./components/History";
 
 const History = ({ onClose }: { onClose: () => void }) => {
   return (
     <div style={styles.overlay as React.CSSProperties}>
       <div style={styles.popup as React.CSSProperties}>
         <h2>History</h2>
-        <p>This is the history popup content.</p>
+        <ScrollableHistory/>
         <button style={styles.closeButton} onClick={onClose}>
           Close
         </button>
@@ -30,7 +31,8 @@ const styles = {
   popup: {
     backgroundColor: "#3E364A",
     padding: "30px",
-    border: "5px solid #f5eed5",
+    width: "500px",
+    border: "5px solid #9083A5",
     borderRadius: "15px",
     textAlign: "center",
     fontFamily: "'Press Start 2P', cursive",

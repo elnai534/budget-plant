@@ -45,7 +45,7 @@ const styles = {
   popup: {
     backgroundColor: "#3E364A",
     padding: "30px",
-    border: "5px solid #f5eed5",
+    border: "5px solid #9083A5",
     borderRadius: "15px",
     textAlign: "center", // Center all text inside the popup
     fontFamily: "'Press Start 2P', cursive",
