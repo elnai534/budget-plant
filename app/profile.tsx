@@ -48,7 +48,7 @@ const styles = {
     border: "5px solid #9083A5",
     borderRadius: "15px",
     textAlign: "center", // Center all text inside the popup
-    fontFamily: "'Press Start 2P', cursive",
+    fontFamily: "VT323, serif",
     color: "#f5eed5",
     boxShadow: "0 4px 6px rgba(0, 0, 0, 0.2)",
     width: "400px",
@@ -74,14 +74,14 @@ const styles = {
   },
   closeButton: {
     marginTop: "20px",
-    backgroundColor: "#AFE593",
+    backgroundColor: "#FFC0CB",
     border: "2px solid #9083A5",
     padding: "10px 25px",
     borderRadius: "5px",
-    fontFamily: "'Press Start 2P', cursive",
+    fontFamily: "VT323, serif",
+    fontSize: "20px",
     color: "#FFFDED",
     cursor: "pointer",
-    fontSize: "16px",
   },
 };
 
