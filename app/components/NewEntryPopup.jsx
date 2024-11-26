@@ -51,126 +51,125 @@ const NewEntryPopup = ({ isOpen, onClose, addRecord }) => {
       <div
         style={{
           backgroundColor: "#3E364A",
-          padding: "20px",
+          padding: "30px",
           border: "5px solid #9083A5",
           borderRadius: "15px",
-          textAlign: "center",
           fontFamily: "'Press Start 2P', cursive",
-          color: "#000",
           boxShadow: "0 4px 6px rgba(0, 0, 0, 0.2)",
+          width: "600px",
+          maxWidth: "90%",
+          boxSizing: "border-box", // Ensure proper box-sizing
         }}
       >
-        <h2 style={{ marginBottom: "20px", color: "#000" }}>New Entry</h2>
-        <div
-          style={{
-            marginTop: "20px",
-            textAlign: "left",
-          }}
-        >
-          <label style={{ display: "block", marginBottom: "10px" }}>
-            Title:
+        <h2 style={{ marginBottom: "20px", textAlign: "center", color: "#000" }}>New Entry</h2>
+        <div style={styles.form}>
+          {/* Title Input */}
+          <div style={styles.inputGroup}>
+            <label style={styles.label}>Title:</label>
             <input
               type="text"
               value={title}
               onChange={(e) => setTitle(e.target.value)}
-              style={{
-                display: "block",
-                width: "100%",
-                padding: "8px",
-                marginTop: "5px",
-                borderRadius: "5px",
-                border: "2px solid #9083A5",
-                fontFamily: "'Press Start 2P', cursive",
-              }}
+              style={styles.input}
             />
-          </label>
-          <label style={{ display: "block", marginBottom: "10px" }}>
-            Amount:
+          </div>
+
+          {/* Amount Input */}
+          <div style={styles.inputGroup}>
+            <label style={styles.label}>Amount:</label>
             <input
               type="number"
               value={amount}
               onChange={(e) => setAmount(e.target.value)}
-              style={{
-                display: "block",
-                width: "100%",
-                padding: "8px",
-                marginTop: "5px",
-                borderRadius: "5px",
-                border: "2px solid #9083A5",
-                fontFamily: "'Press Start 2P', cursive",
-              }}
+              style={styles.input}
             />
-          </label>
-          <label style={{ display: "block", marginBottom: "10px" }}>
-            Category:
+          </div>
+
+          {/* Category Input */}
+          <div style={styles.inputGroup}>
+            <label style={styles.label}>Category:</label>
             <input
               type="text"
               value={category}
               onChange={(e) => setCategory(e.target.value)}
-              style={{
-                display: "block",
-                width: "100%",
-                padding: "8px",
-                marginTop: "5px",
-                borderRadius: "5px",
-                border: "2px solid #9083A5",
-                fontFamily: "'Press Start 2P', cursive",
-              }}
+              style={styles.input}
             />
-          </label>
-          <label style={{ display: "block", marginBottom: "10px" }}>
-            Description:
+          </div>
+
+          {/* Description Input */}
+          <div style={styles.inputGroup}>
+            <label style={styles.label}>Description:</label>
             <textarea
               rows="4"
               value={description}
               onChange={(e) => setDescription(e.target.value)}
-              style={{
-                display: "block",
-                width: "100%",
-                padding: "8px",
-                marginTop: "5px",
-                borderRadius: "5px",
-                border: "2px solid #9083A5",
-                fontFamily: "'Press Start 2P', cursive",
-              }}
+              style={{ ...styles.input, height: "60px", resize: "none" }}
             ></textarea>
-          </label>
+          </div>
         </div>
 
-        <div style={{ marginTop: "20px" }}>
-          <button
-            style={{
-              backgroundColor: "#AFE593",
-              border: "2px solid #9083A5",
-              padding: "10px 15px",
-              borderRadius: "5px",
-              fontFamily: "'Press Start 2P', cursive",
-              color: "#FFFDED",
-              cursor: "pointer",
-              marginRight: "10px",
-            }}
-            onClick={handleAddRecord}
-          >
+        <div style={{ marginTop: "20px", textAlign: "center" }}>
+          <button style={styles.addButton} onClick={handleAddRecord}>
             Add
           </button>
-          <button
-            style={{
-              backgroundColor: "#FFC0CB",
-              border: "2px solid #9083A5",
-              padding: "10px 15px",
-              borderRadius: "5px",
-              fontFamily: "'Press Start 2P', cursive",
-              color: "#FFFDED",
-              cursor: "pointer",
-            }}
-            onClick={onClose}
-          >
+          <button style={styles.closeButton} onClick={onClose}>
             Close
           </button>
         </div>
       </div>
     </div>
   );
+};
+
+const styles = {
+  form: {
+    display: "flex",
+    flexDirection: "column", 
+    alignItems: "center", 
+    gap: "20px", 
+  },
+  inputGroup: {
+    display: "flex",
+    flexDirection: "column", 
+    alignItems: "flex-start", 
+    width: "100%",
+  },
+  label: {
+    fontWeight: "bold",
+    color: "#000", 
+    marginBottom: "5px",
+    textAlign: "left",
+    width: "100%",
+  },
+  input: {
+    width: "100%", 
+    maxWidth: "500px", 
+    padding: "8px",
+    borderRadius: "5px",
+    border: "2px solid #9083A5",
+    fontFamily: "'Press Start 2P', cursive",
+    backgroundColor: "#FFF",
+    color: "#000",
+  },
+  addButton: {
+    backgroundColor: "#AFE593",
+    border: "2px solid #9083A5",
+    padding: "10px 15px",
+    borderRadius: "5px",
+    fontFamily: "'Press Start 2P', cursive",
+    color: "#FFFDED",
+    cursor: "pointer",
+    marginRight: "10px",
+  },
+  closeButton: {
+    backgroundColor: "#FFC0CB",
+    border: "2px solid #9083A5",
+    padding: "10px 15px",
+    borderRadius: "5px",
+    fontFamily: "'Press Start 2P', cursive",
+    color: "#FFFDED",
+    cursor: "pointer",
+  },
 };
 
 export default NewEntryPopup;
