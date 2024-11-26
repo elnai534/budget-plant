@@ -1,6 +1,7 @@
 import React, { useState } from "react";
+import NewEntryPopup from "./NewEntryPopup"; // Import the new popup component
+import { useRecords } from "../components/recordsData"; // Import the hook for managing records
 import Profile from "../profile";
-import NewEntry from "../newEntry";
 import History from "../history";
 
 const Taskbar = () => {
@@ -8,6 +9,8 @@ const Taskbar = () => {
   const [isProfileOpen, setIsProfileOpen] = useState(false);
   const [isNewEntryOpen, setIsNewEntryOpen] = useState(false);
   const [hoveredButton, setHoveredButton] = useState(null); // To track hover state
+
+  const { addRecord } = useRecords(); // Access addRecord from the shared context
 
   const toggleHistoryPopup = () => {
     setIsHistoryOpen(!isHistoryOpen);
@@ -74,10 +77,9 @@ const Taskbar = () => {
       >
         Profile
       </button>
-
-      {/* Popups */}
+      <NewEntryPopup isOpen={isNewEntryOpen} onClose={toggleNewEntryPopup} addRecord={addRecord} />
+    {/* Render popups */}
       {isHistoryOpen && <History onClose={toggleHistoryPopup} />}
-      {isNewEntryOpen && <NewEntry onClose={toggleNewEntryPopup} />}
       {isProfileOpen && <Profile onClose={toggleProfilePopup} />}
     </div>
   );

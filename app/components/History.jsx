@@ -1,8 +1,10 @@
 import React from "react";
 import { View, Text, ScrollView, StyleSheet } from "react-native";
-import { records } from "./recordsData"; // Import the records array
+import { useRecords } from "../components/recordsData"; // Import the hook
 
 const ScrollableHistory = () => {
+  const { records } = useRecords(); // Access the dynamic records state
+
   return (
     <View style={styles.container}>
       <ScrollView
@@ -16,10 +18,10 @@ const ScrollableHistory = () => {
             <Text
               style={[
                 styles.recordAmount,
-                { color: record.amount < 0 ? "#FF6B6B" : "#4CAF50" }, // Color based on positive/negative
+                { color: record.amount < 0 ? "#FF6B6B" : "#4CAF50" }, // Color for negative/positive amounts
               ]}
             >
-              ${record.amount.toFixed(2)}
+              ${record.amount}
             </Text>
             <Text style={styles.recordCategory}>{record.category}</Text>
             <Text style={styles.recordDescription}>{record.description}</Text>
@@ -34,7 +36,7 @@ const styles = StyleSheet.create({
   container: {
     height: 500,
     padding: 10,
-    backgroundColor: "#3E364A", // Fixed background color (add missing #)
+    backgroundColor: "#3E364A",
     width: "100%",
     paddingBottom: 50,
   },
@@ -44,7 +46,7 @@ const styles = StyleSheet.create({
     borderRadius: 15,
     padding: 10,
     borderWidth: 3,
-    borderColor: "#f5eed5",
+    borderColor: "#ddd",
   },
   record: {
     padding: 15,
@@ -53,7 +55,7 @@ const styles = StyleSheet.create({
   },
   recordTitle: {
     fontSize: 24,
-    color: "#f5eed5",
+    color: "#FFFFFF",
     fontFamily: "VT323, serif",
   },
   recordAmount: {

@@ -1,4 +1,9 @@
-export const records = [
+import React, { createContext, useContext, useState } from "react";
+
+const RecordsContext = createContext();
+
+export const RecordsProvider = ({ children }) => {
+  const [records, setRecords] = useState([
     {
       title: "Groceries",
       amount: -50.25,
@@ -29,10 +34,23 @@ export const records = [
       category: "Income",
       description: "Payment for freelance project",
     },
-  ];
+  ]);
 
-  export const calculateTotalAmount = () => {
-    return records.reduce((total, record) => total + record.amount, 0);
+  const addRecord = (newRecord) => {
+    setRecords((prevRecords) => [...prevRecords, newRecord]);
   };
 
-  export const totalAmount = calculateTotalAmount();
+  const calculateTotalAmount = () => {
+    return records.reduce((total, record) => total + (record.amount || 0), 0);
+  };
+
+  return (
+    <RecordsContext.Provider value={{ records, addRecord, calculateTotalAmount }}>
+      {children}
+    </RecordsContext.Provider>
+  );
+};
+
+export const useRecords = () => {
+  return useContext(RecordsContext);
+};

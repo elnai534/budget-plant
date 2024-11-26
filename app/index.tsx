@@ -2,20 +2,23 @@ import { Text, View, StyleSheet, Image } from "react-native";
 import Taskbar from "./components/Taskbar";
 import ScrollableHistory from "./components/History";
 import PlantImage from "./components/Plant";
-import TopHotbar from "./components/TopHotbar"
-import TotalDisplay from "./components/TotalDisplay"
+import TopHotbar from "./components/TopHotbar";
+import TotalDisplay from "./components/TotalDisplay";
+import { RecordsProvider } from "./components/recordsData"; // Import the provider
 
 export default function Index() {
   return (
-    <View style={styles.container}>
-      <View style={styles.frame}>
-        <Taskbar />
-        <ScrollableHistory/>
-        <TotalDisplay/>
-        <PlantImage/>
-        <TopHotbar/>
+    <RecordsProvider>
+      <View style={styles.container}>
+        <View style={styles.frame}>
+          <Taskbar />
+          <ScrollableHistory />
+          <TotalDisplay />
+          <PlantImage />
+          <TopHotbar />
+        </View>
       </View>
-    </View>
+    </RecordsProvider>
   );
 }
 
@@ -26,17 +29,17 @@ const styles = StyleSheet.create({
     borderColor: "#000000",
     width: 720,
     height: 1280,
-    margin: "auto"
+    margin: "auto",
   },
 
   frame: {
-    width:720,
+    width: 720,
     height: 1280,
     backgroundColor: "#3E364A",
     borderWidth: 1,
     borderColor: "#FFFFFF",
     borderRadius: 10,
     alignItems: "center",
-    flexDirection: "column-reverse"
-  }
-})
+    flexDirection: "column-reverse",
+  },
+});

@@ -8,7 +8,7 @@ const TotalDisplay = () => {
       <Text style={styles.text}>
         Balance:{" "}
         <Text style={[styles.text, { color: totalAmount < 0 ? "#FF6B6B" : "#4CAF50" }]}>
-          ${totalAmount.toFixed(2)}
+          ${totalAmount}
         </Text>
       </Text>
     </View>
