@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { View, Text, TextInput, TouchableOpacity, StyleSheet, Modal } from "react-native";
 
 const NewEntryPopup = ({ isOpen, onClose, addRecord }) => {
   const [title, setTitle] = useState("");
@@ -31,147 +32,142 @@ const NewEntryPopup = ({ isOpen, onClose, addRecord }) => {
     onClose();
   };
 
-  if (!isOpen) return null;
-
   return (
-    <div style={styles.popupOverlay}>
-      <div style={styles.popupContent}>
-        <h2 style={styles.header}>New Entry</h2>
-        <div style={styles.formSection}>
-          <label style={styles.label}>
-            Title:
-            <input
-              type="text"
+    <Modal visible={isOpen} transparent={true} animationType="fade">
+      <View style={styles.popupOverlay}>
+        <View style={styles.popupContent}>
+          <Text style={styles.header}>New Entry</Text>
+          <View style={styles.formSection}>
+            <Text style={styles.label}>Title:</Text>
+            <TextInput
               value={title}
-              onChange={(e) => setTitle(e.target.value)}
+              onChangeText={setTitle}
               style={styles.inputField}
             />
-          </label>
-          <label style={styles.label}>
-            Amount:
-            <input
-              type="number"
+            <Text style={styles.label}>Amount:</Text>
+            <TextInput
               value={amount}
-              onChange={(e) => setAmount(e.target.value)}
+              onChangeText={setAmount}
+              keyboardType="numeric"
               style={styles.inputField}
             />
-          </label>
-          <label style={styles.label}>
-            Category:
-            <input
-              type="text"
+            <Text style={styles.label}>Category:</Text>
+            <TextInput
               value={category}
-              onChange={(e) => setCategory(e.target.value)}
+              onChangeText={setCategory}
               style={styles.inputField}
             />
-          </label>
-          <label style={styles.label}>
-            Description:
-            <textarea
-              rows="4"
+            <Text style={styles.label}>Description:</Text>
+            <TextInput
               value={description}
-              onChange={(e) => setDescription(e.target.value)}
+              onChangeText={setDescription}
               style={styles.textareaField}
-            ></textarea>
-            </label>
-          </div>
-          <div style={styles.buttonContainer}>
-          <button style={styles.addButton} onClick={handleAddRecord}>
-            Add
-          </button>
-          <button style={styles.closeButton} onClick={onClose}>
-            Close
-          </button>
-        </div>
-        </div>
-    </div>
+              multiline={true}
+              numberOfLines={4}
+            />
+          </View>
+          <View style={styles.buttonContainer}>
+            <TouchableOpacity style={styles.addButton} onPress={handleAddRecord}>
+              <Text style={styles.buttonText}>Add</Text>
+            </TouchableOpacity>
+            <TouchableOpacity style={styles.closeButton} onPress={onClose}>
+              <Text style={styles.buttonText}>Close</Text>
+            </TouchableOpacity>
+          </View>
+        </View>
+      </View>
+    </Modal>
   );
 };
 
-const styles = {
+const styles = StyleSheet.create({
   popupOverlay: {
-    position: "fixed",
-    top: 0,
-    left: 0,
-    width: "100%",
-    height: "100%",
+    flex: 1,
     backgroundColor: "rgba(0, 0, 0, 0.8)",
-    display: "flex",
     justifyContent: "center",
     alignItems: "center",
-    zIndex: 1000,
   },
   popupContent: {
     backgroundColor: "#3E364A",
-    padding: "20px",
-    border: "5px solid #9083A5",
-    borderRadius: "15px",
+    padding: 20,
+    borderWidth: 5,
+    borderColor: "#9083A5",
+    borderRadius: 15,
     textAlign: "center",
     fontFamily: "VT323, serif",
     width: 500,
-    color: "#000",
-    boxShadow: "0 4px 6px rgba(0, 0, 0, 0.2)",
+    maxWidth: "90%",
+    boxShadow: "0 4px 6px rgba(0, 0, 0, 0.2)", // Use shadow properties if on iOS
   },
   header: {
-    marginBottom: "20px",
+    marginBottom: 20,
     color: "#fff",
+    fontSize: 24,
+    textAlign: "center",
   },
   formSection: {
-    marginTop: "20px",
-    textAlign: "left",
+    marginTop: 20,
   },
   label: {
-    display: "block",
-    marginBottom: "10px",
+    marginBottom: 10,
     color: "#fff",
+    fontSize: 16,
   },
   inputField: {
-    display: "block",
     width: "100%",
-    padding: "8px",
-    width: "480px",
-    marginTop: "5px",
-    borderRadius: "5px",
-    border: "2px solid #9083A5",
-    fontFamily: "VT323, serif",
+    padding: 10,
+    marginBottom: 15,
+    borderRadius: 5,
+    borderWidth: 2,
+    borderColor: "#9083A5",
     backgroundColor: "#fff",
     color: "#000",
+    fontSize: 16,
+    fontFamily: "VT323, serif",
   },
   textareaField: {
-    display: "block",
-    width: "480px",
-    padding: "8px",
-    marginTop: "5px",
-    borderRadius: "5px",
-    border: "2px solid #9083A5",
-    fontFamily: "VT323, serif",
+    width: "100%",
+    padding: 10,
+    marginBottom: 15,
+    borderRadius: 5,
+    borderWidth: 2,
+    borderColor: "#9083A5",
     backgroundColor: "#fff",
     color: "#000",
+    fontSize: 16,
+    fontFamily: "VT323, serif",
   },
   buttonContainer: {
-    marginTop: "20px",
+    marginTop: 20,
+    flexDirection: "row",
+    justifyContent: "space-between",
   },
   addButton: {
     backgroundColor: "#AFE593",
-    border: "2px solid #9083A5",
-    padding: "10px 15px",
-    borderRadius: "5px",
-    fontSize: "20px",
-    fontFamily: "VT323, serif",
-    color: "#FFFDED",
-    cursor: "pointer",
-    marginRight: "10px",
+    padding: 10,
+    borderRadius: 5,
+    borderWidth: 2,
+    borderColor: "#9083A5",
+    flex: 1,
+    marginRight: 10,
+    justifyContent: "center",
+    alignItems: "center",
   },
   closeButton: {
     backgroundColor: "#FFC0CB",
-    border: "2px solid #9083A5",
-    padding: "10px 15px",
-    borderRadius: "5px",
-    fontSize: "20px",
-    fontFamily: "VT323, serif",
-    color: "#FFFDED",
-    cursor: "pointer",
+    padding: 10,
+    borderRadius: 5,
+    borderWidth: 2,
+    borderColor: "#9083A5",
+    flex: 1,
+    justifyContent: "center",
+    alignItems: "center",
   },
-};
+  buttonText: {
+    fontSize: 16,
+    color: "#FFFDED",
+    fontFamily: "VT323, serif",
+  },
+});
 
 export default NewEntryPopup;

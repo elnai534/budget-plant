@@ -1,88 +1,96 @@
 import React from "react";
+import { View, Text, StyleSheet, Modal, Image, TouchableOpacity } from "react-native";
 
 const Profile = ({ onClose }: { onClose: () => void }) => {
   return (
-    <div style={styles.overlay as React.CSSProperties}>
-      <div style={styles.popup as React.CSSProperties}>
-        <img
-          src="https://cdn4.iconfinder.com/data/icons/rounded-black-basic-ui/139/Profile01-RoundedBlack-512.png"
-          alt="Profile Icon"
-          style={styles.profilePicture as React.CSSProperties}
-        />
-        <h2 style={styles.heading}>Profile</h2>
-        <div style={styles.details as React.CSSProperties}>
-          <p>
-            <strong>Name:</strong> John Doe
-          </p>
-          <p>
-            <strong>Email:</strong> john.doe@example.com
-          </p>
-          <p>
-            <strong>Joined:</strong> January 2024
-          </p>
-        </div>
-        <button style={styles.closeButton as React.CSSProperties} onClick={onClose}>
-          Close
-        </button>
-      </div>
-    </div>
+    <Modal transparent={true} animationType="fade" visible={true}>
+      <View style={styles.overlay}>
+        <View style={styles.popup}>
+          <Image
+            source={{
+              uri: "https://cdn4.iconfinder.com/data/icons/rounded-black-basic-ui/139/Profile01-RoundedBlack-512.png",
+            }}
+            style={styles.profilePicture}
+          />
+          <Text style={styles.heading}>Profile</Text>
+          <View style={styles.details}>
+            <Text>
+              <Text style={styles.label}>Name:</Text> John Doe
+            </Text>
+            <Text>
+              <Text style={styles.label}>Email:</Text> john.doe@example.com
+            </Text>
+            <Text>
+              <Text style={styles.label}>Joined:</Text> January 2024
+            </Text>
+          </View>
+          <TouchableOpacity style={styles.closeButton} onPress={onClose}>
+            <Text style={styles.closeButtonText}>Close</Text>
+          </TouchableOpacity>
+        </View>
+      </View>
+    </Modal>
   );
 };
 
-const styles = {
+const styles = StyleSheet.create({
   overlay: {
-    position: "fixed",
-    top: 0,
-    left: 0,
-    width: "100%",
-    height: "100%",
+    flex: 1,
     backgroundColor: "rgba(0, 0, 0, 0.8)",
-    display: "flex",
     justifyContent: "center",
     alignItems: "center",
-    zIndex: 1000,
   },
   popup: {
     backgroundColor: "#3E364A",
-    padding: "30px",
-    border: "5px solid #9083A5",
-    borderRadius: "15px",
-    textAlign: "center", // Center all text inside the popup
-    fontFamily: "VT323, serif",
-    color: "#f5eed5",
-    boxShadow: "0 4px 6px rgba(0, 0, 0, 0.2)",
-    width: "400px",
+    padding: 30,
+    borderWidth: 5,
+    borderColor: "#9083A5",
+    borderRadius: 15,
+    textAlign: "center",
+    alignItems: "center",
+    width: 400,
     maxWidth: "90%",
+    boxShadow: "0 4px 6px rgba(0, 0, 0, 0.2)", // Shadow is effective for iOS
   },
   profilePicture: {
-    width: "100px",
-    height: "100px",
-    borderRadius: "50%",
-    marginBottom: "20px",
-    border: "3px solid #FFFDED",
+    width: 100,
+    height: 100,
+    borderRadius: 50,
+    marginBottom: 20,
+    borderWidth: 3,
+    borderColor: "#FFFDED",
   },
   heading: {
-    marginBottom: "20px",
-    fontSize: "24px",
+    marginBottom: 20,
+    fontSize: 24,
+    color: "#f5eed5",
+    textAlign: "center",
+    fontFamily: "VT323, serif",
   },
   details: {
-    textAlign: "center", // Ensure text in details is also centered
-    marginBottom: "20px",
-    fontSize: "18px",
-    lineHeight: "1.5",
-    color: "#DADADA",
+    textAlign: "center",
+    marginBottom: 20,
+  },
+  label: {
+    fontWeight: "bold",
+    color: "#f5eed5",
   },
   closeButton: {
-    marginTop: "20px",
+    marginTop: 20,
     backgroundColor: "#FFC0CB",
-    border: "2px solid #9083A5",
-    padding: "10px 25px",
-    borderRadius: "5px",
-    fontFamily: "VT323, serif",
-    fontSize: "20px",
-    color: "#FFFDED",
-    cursor: "pointer",
+    borderWidth: 2,
+    borderColor: "#9083A5",
+    paddingVertical: 10,
+    paddingHorizontal: 25,
+    borderRadius: 5,
+    alignItems: "center",
+    justifyContent: "center",
   },
-};
+  closeButtonText: {
+    fontFamily: "VT323, serif",
+    fontSize: 20,
+    color: "#FFFDED",
+  },
+});
 
 export default Profile;

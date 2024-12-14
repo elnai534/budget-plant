@@ -1,8 +1,9 @@
 import React, { useState } from "react";
+import { View, Text, TouchableOpacity, StyleSheet } from "react-native";
 import NewEntryPopup from "./NewEntryPopup"; // Import the new popup component
 import { useRecords } from "../components/recordsData"; // Import the hook for managing records
-import Profile from "../profile";
-import History from "../history";
+import Profile from "../Profile";
+import History from "../History";
 
 const Taskbar = () => {
   const [isHistoryOpen, setIsHistoryOpen] = useState(false);
@@ -31,70 +32,73 @@ const Taskbar = () => {
   };
 
   const getButtonStyle = (buttonName) => ({
-    width: "213px",
-    height: "75px",
-    borderRadius: "8px",
-    border: "none",
-    fontSize: "32px",
-    fontWeight: "bold",
-    fontFamily: "VT323, serif",
-    display: "flex",
-    justifyContent: "center",
-    alignItems: "center",
-    cursor: "pointer",
     backgroundColor: hoveredButton === buttonName ? "#f5eed5" : "#FCB761",
     color: hoveredButton === buttonName ? "#000" : "#FFF",
-    transition: "background-color 0.3s ease, color 0.3s ease",
+    ...styles.button,
   });
 
   return (
-    <div style={styles.taskbar}>
+    <View style={styles.taskbar}>
       {/* History Button */}
-      <button
+      <TouchableOpacity
         style={getButtonStyle("history")}
-        onClick={toggleHistoryPopup}
-        onMouseEnter={() => setHoveredButton("history")}
-        onMouseLeave={() => setHoveredButton(null)}
+        onPress={toggleHistoryPopup}
+        onPressIn={() => setHoveredButton("history")}
+        onPressOut={() => setHoveredButton(null)}
       >
-        History
-      </button>
+        <Text style={styles.buttonText}>History</Text>
+      </TouchableOpacity>
 
       {/* New Entry Button */}
-      <button
+      <TouchableOpacity
         style={getButtonStyle("newEntry")}
-        onClick={toggleNewEntryPopup}
-        onMouseEnter={() => setHoveredButton("newEntry")}
-        onMouseLeave={() => setHoveredButton(null)}
+        onPress={toggleNewEntryPopup}
+        onPressIn={() => setHoveredButton("newEntry")}
+        onPressOut={() => setHoveredButton(null)}
       >
-        New Entry
-      </button>
+        <Text style={styles.buttonText}>New Entry</Text>
+      </TouchableOpacity>
 
       {/* Profile Button */}
-      <button
+      <TouchableOpacity
         style={getButtonStyle("profile")}
-        onClick={toggleProfilePopup}
-        onMouseEnter={() => setHoveredButton("profile")}
-        onMouseLeave={() => setHoveredButton(null)}
+        onPress={toggleProfilePopup}
+        onPressIn={() => setHoveredButton("profile")}
+        onPressOut={() => setHoveredButton(null)}
       >
-        Profile
-      </button>
+        <Text style={styles.buttonText}>Profile</Text>
+      </TouchableOpacity>
+
+      {/* Render Popups */}
       <NewEntryPopup isOpen={isNewEntryOpen} onClose={toggleNewEntryPopup} addRecord={addRecord} />
-    {/* Render popups */}
       {isHistoryOpen && <History onClose={toggleHistoryPopup} />}
       {isProfileOpen && <Profile onClose={toggleProfilePopup} />}
-    </div>
+    </View>
   );
 };
 
-const styles = {
+const styles = StyleSheet.create({
   taskbar: {
-    display: "flex",
+    flexDirection: "row", // Align buttons horizontally
     justifyContent: "center",
     alignItems: "center",
-    gap: "20px",
-    padding: "20px",
-    marginTop: "10px",
+    gap: 20, // Use `gap` with React Native >= 0.71 or Expo SDK >= 49
+    padding: 20,
+    marginTop: 10,
   },
-};
+  button: {
+    width: 213,
+    height: 75,
+    borderRadius: 8,
+    justifyContent: "center",
+    alignItems: "center",
+  },
+  buttonText: {
+    fontSize: 32,
+    fontWeight: "bold",
+    fontFamily: "VT323, serif", // Ensure you load this font in your project
+    color: "#FFF", // Default button text color
+  },
+});
 
 export default Taskbar;
