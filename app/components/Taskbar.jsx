@@ -2,8 +2,8 @@ import React, { useState } from "react";
 import { View, Text, TouchableOpacity, StyleSheet } from "react-native";
 import NewEntryPopup from "./NewEntryPopup"; // Import the new popup component
 import { useRecords } from "../components/recordsData"; // Import the hook for managing records
-import Profile from "../Profile";
-import History from "../History";
+import Profile from "../profile";
+import History from "../history";
 
 const Taskbar = () => {
   const [isHistoryOpen, setIsHistoryOpen] = useState(false);
