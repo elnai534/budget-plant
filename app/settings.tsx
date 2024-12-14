@@ -1,12 +1,7 @@
-import React, { useState } from "react";
-
+import React from "react";
 import { View, Text, TouchableOpacity, StyleSheet, Image } from "react-native";
-interface SettingsProps {
-  onClose: () => void; 
-}
-const Settings: React.FC<SettingsProps> = ({ onClose }) => {
-  //const [isLightMode, setIsLightMode] = useState(true); 
-  const [isDarkMode, setIsDarkMode] = useState(false); 
+
+const Settings = ({ onClose }) => {
   return (
     <View style={styles.overlay}>
       <View style={styles.popup}>
@@ -17,21 +12,39 @@ const Settings: React.FC<SettingsProps> = ({ onClose }) => {
 
         <Text style={styles.title}>Settings</Text>
 
-          <View style={styles.item}>
-            <Text style={styles.label}>Dark Mode:</Text>
-            <TouchableOpacity
-            onPress={() => setIsDarkMode((prev) => !prev)}>
-              <Image
-                source={
-                  isDarkMode
-                    ? require("../assets/images/toggle-on.png")
-                    : require("../assets/images/toggle-off.png")
-                }
-                style={styles.toggleImage}
-              />
-            </TouchableOpacity>
-          </View>
+        {/* Volume Toggle */}
+        <View style={styles.item}>
+          <Text style={styles.label}>Volume:</Text>
+          <TouchableOpacity>
+            <Image
+              source={require("../assets/images/toggle-off.png")}
+              style={styles.toggleImage}
+            />
+          </TouchableOpacity>
         </View>
+
+        {/* Light Mode Toggle */}
+        <View style={styles.item}>
+          <Text style={styles.label}>Light Mode:</Text>
+          <TouchableOpacity>
+            <Image
+              source={require("../assets/images/toggle-on.png")}
+              style={styles.toggleImage}
+            />
+          </TouchableOpacity>
+        </View>
+
+        {/* Dark Mode Toggle */}
+        <View style={styles.item}>
+          <Text style={styles.label}>Dark Mode:</Text>
+          <TouchableOpacity>
+            <Image
+              source={require("../assets/images/toggle-off.png")}
+              style={styles.toggleImage}
+            />
+          </TouchableOpacity>
+        </View>
+      </View>
     </View>
   );
 };
@@ -47,14 +60,13 @@ const styles = StyleSheet.create({
   },
   popup: {
     backgroundColor: "#3E364A",
-    padding: 20,
-    width: 350,
-    borderWidth: 2,
+    padding: 30,
+    width: 300,
+    borderWidth: 5,
     borderColor: "#9083A5",
-    borderRadius: 10,
-    alignItems: "center", 
+    borderRadius: 15,
+    textAlign: "center",
     position: "relative",
-    overflow: "hidden",
   },
   title: {
     fontSize: 24,
@@ -64,26 +76,19 @@ const styles = StyleSheet.create({
     fontFamily: "VT323, serif",
   },
   item: {
+    marginVertical: 15,
     flexDirection: "row",
-    alignItems: "center",
     justifyContent: "space-between",
-    width: "90%", 
-    paddingHorizontal: 15, 
-    marginTop: 0
+    alignItems: "center",
   },
   label: {
     fontSize: 16,
     color: "#f5eed5",
     fontFamily: "VT323, serif",
   },
-  toggleButton: {
-      justifyContent: "center",
-      alignItems: "center",
-    },
   toggleImage: {
     width: 50,
     height: 25,
-    resizeMode: "contain", 
   },
   exitButton: {
     position: "absolute",
@@ -97,6 +102,5 @@ const styles = StyleSheet.create({
     color: "#f5eed5",
   },
 });
-
 
 export default Settings;
