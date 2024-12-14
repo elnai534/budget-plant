@@ -27,14 +27,14 @@ const styles = StyleSheet.create({
     flex: 1,
     alignItems: "center",
     borderColor: "#000000",
-    width: 720,
-    height: 1280,
-    margin: "auto",
+    width: "100%",
+    height: "100%",
+    margin: "auto"
   },
 
   frame: {
-    width: 720,
-    height: 1280,
+    width: "100%",
+    height: "100%",
     backgroundColor: "#3E364A",
     borderWidth: 1,
     borderColor: "#FFFFFF",

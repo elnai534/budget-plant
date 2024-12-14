@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { View, Text, TouchableOpacity, StyleSheet } from 'react-native';
 import NewEntryPopup from "./NewEntryPopup"; // Import the new popup component
 import { useRecords } from "../components/recordsData"; // Import the hook for managing records
 import Profile from "../profile";
@@ -48,43 +49,45 @@ const Taskbar = () => {
   });
 
   return (
-    <div style={styles.taskbar}>
+    <View style={styles.taskbar}>
       {/* History Button */}
-      <button
-        style={getButtonStyle("history")}
-        onClick={toggleHistoryPopup}
-        onMouseEnter={() => setHoveredButton("history")}
-        onMouseLeave={() => setHoveredButton(null)}
+      <TouchableOpacity
+        style={[styles.button, hoveredButton === "history" && styles.hoveredButton]}
+        onPress={toggleHistoryPopup}
+        onPressIn={() => setHoveredButton("history")}
+        onPressOut={() => setHoveredButton(null)}
       >
-        History
-      </button>
-
+        <Text style={styles.buttonText}>History</Text>
+      </TouchableOpacity>
+  
       {/* New Entry Button */}
-      <button
-        style={getButtonStyle("newEntry")}
-        onClick={toggleNewEntryPopup}
-        onMouseEnter={() => setHoveredButton("newEntry")}
-        onMouseLeave={() => setHoveredButton(null)}
+      <TouchableOpacity
+        style={[styles.button, hoveredButton === "newEntry" && styles.hoveredButton]}
+        onPress={toggleNewEntryPopup}
+        onPressIn={() => setHoveredButton("newEntry")}
+        onPressOut={() => setHoveredButton(null)}
       >
-        New Entry
-      </button>
-
+        <Text style={styles.buttonText}>New Entry</Text>
+      </TouchableOpacity>
+  
       {/* Profile Button */}
-      <button
-        style={getButtonStyle("profile")}
-        onClick={toggleProfilePopup}
-        onMouseEnter={() => setHoveredButton("profile")}
-        onMouseLeave={() => setHoveredButton(null)}
+      <TouchableOpacity
+        style={[styles.button, hoveredButton === "profile" && styles.hoveredButton]}
+        onPress={toggleProfilePopup}
+        onPressIn={() => setHoveredButton("profile")}
+        onPressOut={() => setHoveredButton(null)}
       >
-        Profile
-      </button>
+        <Text style={styles.buttonText}>Profile</Text>
+      </TouchableOpacity>
+  
       <NewEntryPopup isOpen={isNewEntryOpen} onClose={toggleNewEntryPopup} addRecord={addRecord} />
-    {/* Render popups */}
+  
+      {/* Render popups */}
       {isHistoryOpen && <History onClose={toggleHistoryPopup} />}
       {isProfileOpen && <Profile onClose={toggleProfilePopup} />}
-    </div>
+    </View>
   );
-};
+}
 
 const styles = {
   taskbar: {
