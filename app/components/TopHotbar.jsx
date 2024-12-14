@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { Text, View, StyleSheet, Image, TouchableOpacity } from "react-native";
-import Settings from "../settings"; // Import the Settings popup
+import Settings from "../Settings"; // Import the Settings popup
 
 const TopHotbar = () => {
   const [isSettingsOpen, setIsSettingsOpen] = useState(false); // Track Settings popup state
