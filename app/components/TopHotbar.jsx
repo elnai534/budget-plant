@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { Text, View, StyleSheet, Image, TouchableOpacity } from "react-native";
-import Settings from "../settings"; // Import the Settings popup
+import Settings from "../Settings"; // Import the Settings popup
 
 const TopHotbar = () => {
   const [isSettingsOpen, setIsSettingsOpen] = useState(false); // Track Settings popup state
@@ -100,27 +100,26 @@ const styles = StyleSheet.create({
   },
   text: {
     fontFamily: "VT323, serif",
-    fontSize: 96,
+    fontSize: 36,
     fontWeight: "bold",
     color: "#f5eed5",
+    alignItems: "center",
   },
   cogwheelTouchable: {
     position: "absolute",
-    top: 15,
     right: 25,
   },
   cogwheel: {
-    width: 75,
-    height: 75,
+    width: 50,
+    height: 50,
   },
   hamburgerTouchable: {
     position: "absolute",
-    top: 15,
     left: 25,
   },
   hamburgericon: {
-    width: 50,
-    height: 75,
+    width: 25,
+    height: 50,
   },
   sidebar: {
     position: "absolute",

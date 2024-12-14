@@ -34,11 +34,10 @@ const ScrollableHistory = () => {
 
 const styles = StyleSheet.create({
   container: {
-    height: 500,
+    height: "30%",
     padding: 10,
     backgroundColor: "#3E364A",
     width: "100%",
-    paddingBottom: 50,
   },
   scrollableSection: {
     flex: 1,

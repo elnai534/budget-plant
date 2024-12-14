@@ -1,13 +1,17 @@
 import React, { useState } from "react";
-import { View, Text, TouchableOpacity, StyleSheet, Image } from "react-native";
+import { View, Text, TouchableOpacity, StyleSheet, Image, Dimensions } from "react-native";
+
+const { height, width } = Dimensions.get("window"); // Get screen dimensions
+
 interface SettingsProps {
-  onClose: () => void; 
+  onClose: () => void;
 }
+
 const Settings: React.FC<SettingsProps> = ({ onClose }) => {
-  //const [isLightMode, setIsLightMode] = useState(true); 
-  const [isDarkMode, setIsDarkMode] = useState(false); 
+  const [isDarkMode, setIsDarkMode] = useState(false);
+
   return (
-    <View style={styles.overlay}>
+    <View style={[styles.overlay, { height, width }]}>
       <View style={styles.popup}>
         {/* Exit Button */}
         <TouchableOpacity onPress={onClose} style={styles.exitButton}>
@@ -15,31 +19,28 @@ const Settings: React.FC<SettingsProps> = ({ onClose }) => {
         </TouchableOpacity>
 
         <Text style={styles.title}>Settings</Text>
-        
+
         <View style={styles.item}>
-            <Text style={styles.label}>Dark Mode:</Text>
-            <TouchableOpacity
-            onPress={() => setIsDarkMode((prev) => !prev)}>
-              <Image
-                source={
-                  isDarkMode
-                    ? require("../assets/images/toggle-on.png")
-                    : require("../assets/images/toggle-off.png")
-                }
-                style={styles.toggleImage}
-              />
-            </TouchableOpacity>
-          </View>
+          <Text style={styles.label}>Dark Mode:</Text>
+          <TouchableOpacity onPress={() => setIsDarkMode((prev) => !prev)}>
+            <Image
+              source={
+                isDarkMode
+                  ? require("../assets/images/toggle-on.png")
+                  : require("../assets/images/toggle-off.png")
+              }
+              style={styles.toggleImage}
+            />
+          </TouchableOpacity>
         </View>
       </View>
+    </View>
   );
 };
 
 const styles = StyleSheet.create({
   overlay: {
-    position: "fixed",
-    width: "100%",
-    height: "100%",
+    position: "absolute",
     backgroundColor: "rgba(0, 0, 0, 0.8)",
     justifyContent: "center",
     alignItems: "center",
@@ -51,9 +52,7 @@ const styles = StyleSheet.create({
     borderWidth: 2,
     borderColor: "#9083A5",
     borderRadius: 10,
-    alignItems: "center", 
-    position: "relative",
-    overflow: "hidden",
+    alignItems: "center",
   },
   title: {
     fontSize: 24,
@@ -66,23 +65,18 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     alignItems: "center",
     justifyContent: "space-between",
-    width: "90%", 
-    paddingHorizontal: 15, 
-    marginTop: 0,
+    width: "90%",
+    marginTop: 10,
   },
   label: {
     fontSize: 16,
     color: "#f5eed5",
     fontFamily: "VT323, serif",
   },
-  toggleButton: {
-    justifyContent: "center",
-    alignItems: "center",
-  },
   toggleImage: {
     width: 50,
     height: 25,
-    resizeMode: "contain", 
+    resizeMode: "contain",
   },
   exitButton: {
     position: "absolute",

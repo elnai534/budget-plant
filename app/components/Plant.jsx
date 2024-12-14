@@ -19,7 +19,8 @@ const styles = StyleSheet.create({
     paddingBottom: 20,
   },
   image: {
-    
+    width: 250,
+    height: 300,
   },
 });
 
