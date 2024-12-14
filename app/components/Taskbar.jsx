@@ -1,102 +1,94 @@
 import React, { useState } from "react";
-import { View, Text, TouchableOpacity, StyleSheet } from "react-native";
+import { View, Text, TouchableOpacity, StyleSheet, Dimensions } from "react-native";
 import NewEntryPopup from "./NewEntryPopup"; // Import the new popup component
 import { useRecords } from "../components/recordsData"; // Import the hook for managing records
 import Profile from "../Profile";
 import History from "../History";
 
 const Taskbar = () => {
-  const [isHistoryOpen, setIsHistoryOpen] = useState(false);
-  const [isProfileOpen, setIsProfileOpen] = useState(false);
-  const [isNewEntryOpen, setIsNewEntryOpen] = useState(false);
-  const [hoveredButton, setHoveredButton] = useState(null); // To track hover state
-
+  const [selectedButton, setSelectedButton] = useState(null); // Track which button is selected
   const { addRecord } = useRecords(); // Access addRecord from the shared context
 
-  const toggleHistoryPopup = () => {
-    setIsHistoryOpen(!isHistoryOpen);
-    setIsProfileOpen(false);
-    setIsNewEntryOpen(false);
+  // Handle button press and popup toggling
+  const handleButtonPress = (buttonName) => {
+    setSelectedButton((prev) => (prev === buttonName ? null : buttonName));
   };
-
-  const toggleProfilePopup = () => {
-    setIsProfileOpen(!isProfileOpen);
-    setIsHistoryOpen(false);
-    setIsNewEntryOpen(false);
-  };
-
-  const toggleNewEntryPopup = () => {
-    setIsNewEntryOpen(!isNewEntryOpen);
-    setIsProfileOpen(false);
-    setIsHistoryOpen(false);
-  };
-
-  const getButtonStyle = (buttonName) => ({
-    backgroundColor: hoveredButton === buttonName ? "#f5eed5" : "#FCB761",
-    color: hoveredButton === buttonName ? "#000" : "#FFF",
-    ...styles.button,
-  });
 
   return (
     <View style={styles.taskbar}>
       {/* History Button */}
       <TouchableOpacity
-        style={getButtonStyle("history")}
-        onPress={toggleHistoryPopup}
-        onPressIn={() => setHoveredButton("history")}
-        onPressOut={() => setHoveredButton(null)}
+        style={[
+          styles.button,
+          selectedButton === "history" && styles.buttonActive,
+        ]}
+        onPress={() => handleButtonPress("history")}
       >
         <Text style={styles.buttonText}>History</Text>
       </TouchableOpacity>
 
       {/* New Entry Button */}
       <TouchableOpacity
-        style={getButtonStyle("newEntry")}
-        onPress={toggleNewEntryPopup}
-        onPressIn={() => setHoveredButton("newEntry")}
-        onPressOut={() => setHoveredButton(null)}
+        style={[
+          styles.button,
+          selectedButton === "newEntry" && styles.buttonActive,
+        ]}
+        onPress={() => handleButtonPress("newEntry")}
       >
         <Text style={styles.buttonText}>New Entry</Text>
       </TouchableOpacity>
 
       {/* Profile Button */}
       <TouchableOpacity
-        style={getButtonStyle("profile")}
-        onPress={toggleProfilePopup}
-        onPressIn={() => setHoveredButton("profile")}
-        onPressOut={() => setHoveredButton(null)}
+        style={[
+          styles.button,
+          selectedButton === "profile" && styles.buttonActive,
+        ]}
+        onPress={() => handleButtonPress("profile")}
       >
         <Text style={styles.buttonText}>Profile</Text>
       </TouchableOpacity>
 
       {/* Render Popups */}
-      <NewEntryPopup isOpen={isNewEntryOpen} onClose={toggleNewEntryPopup} addRecord={addRecord} />
-      {isHistoryOpen && <History onClose={toggleHistoryPopup} />}
-      {isProfileOpen && <Profile onClose={toggleProfilePopup} />}
+      {selectedButton === "newEntry" && (
+        <NewEntryPopup isOpen={true} onClose={() => setSelectedButton(null)} addRecord={addRecord} />
+      )}
+      {selectedButton === "history" && (
+        <History onClose={() => setSelectedButton(null)} />
+      )}
+      {selectedButton === "profile" && (
+        <Profile onClose={() => setSelectedButton(null)} />
+      )}
     </View>
   );
 };
 
 const styles = StyleSheet.create({
   taskbar: {
-    flexDirection: "row", // Align buttons horizontally
-    justifyContent: "center",
+    flexDirection: "row",
+    justifyContent: "space-around", // Distribute buttons evenly
     alignItems: "center",
-    gap: 20, // Use `gap` with React Native >= 0.71 or Expo SDK >= 49
     padding: 20,
+     // Optional taskbar background color
   },
   button: {
-    width: "30%",
-    height: 75,
+    width: Dimensions.get("window").width / 4, // Dynamic button width
+    height: 60,
+    paddingHorizontal: 10,
+    marginHorizontal: 10,
     borderRadius: 8,
     justifyContent: "center",
     alignItems: "center",
+    backgroundColor: "#FCB761",
+  },
+  buttonActive: {
+    backgroundColor: "#f5eed5", // Highlight color for active button
   },
   buttonText: {
-    fontSize: 24,
+    fontSize: 18,
     fontWeight: "bold",
-    fontFamily: "VT323, serif", // Ensure you load this font in your project
-    color: "#FFF", // Default button text color
+    fontFamily: "VT323", // Ensure font is preloaded globally
+    color: "#333",
   },
 });
 

@@ -1,11 +1,21 @@
 import React, { useState } from "react";
 import { View, Text, TextInput, TouchableOpacity, StyleSheet, Modal } from "react-native";
+import { useFonts } from "expo-font";
 
 const NewEntryPopup = ({ isOpen, onClose, addRecord }) => {
   const [title, setTitle] = useState("");
   const [amount, setAmount] = useState("");
   const [category, setCategory] = useState("");
   const [description, setDescription] = useState("");
+
+  const [fontsLoaded] = useFonts({
+    VT323: require("../../assets/fonts/VT323-Regular.ttf"), // Ensure the font file is correct
+  });
+
+  // Show a fallback until the fonts are loaded
+  if (!fontsLoaded) {
+    return null;
+  }
 
   const handleAddRecord = () => {
     if (!title || !amount || !category || !description) {
@@ -94,16 +104,15 @@ const styles = StyleSheet.create({
     borderColor: "#9083A5",
     borderRadius: 15,
     textAlign: "center",
-    fontFamily: "VT323, serif",
     width: 500,
     maxWidth: "90%",
-    boxShadow: "0 4px 6px rgba(0, 0, 0, 0.2)", // Use shadow properties if on iOS
   },
   header: {
     marginBottom: 20,
     color: "#fff",
     fontSize: 24,
     textAlign: "center",
+    fontFamily: "VT323", // Apply loaded font
   },
   formSection: {
     marginTop: 20,
@@ -112,6 +121,7 @@ const styles = StyleSheet.create({
     marginBottom: 10,
     color: "#fff",
     fontSize: 16,
+    fontFamily: "VT323", // Apply loaded font
   },
   inputField: {
     width: "100%",
@@ -123,7 +133,7 @@ const styles = StyleSheet.create({
     backgroundColor: "#fff",
     color: "#000",
     fontSize: 16,
-    fontFamily: "VT323, serif",
+    fontFamily: "VT323", // Apply loaded font
   },
   textareaField: {
     width: "100%",
@@ -135,7 +145,7 @@ const styles = StyleSheet.create({
     backgroundColor: "#fff",
     color: "#000",
     fontSize: 16,
-    fontFamily: "VT323, serif",
+    fontFamily: "VT323", // Apply loaded font
   },
   buttonContainer: {
     marginTop: 20,
@@ -166,7 +176,7 @@ const styles = StyleSheet.create({
   buttonText: {
     fontSize: 16,
     color: "#FFFDED",
-    fontFamily: "VT323, serif",
+    fontFamily: "VT323", // Apply loaded font
   },
 });
 

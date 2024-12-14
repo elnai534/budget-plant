@@ -1,5 +1,13 @@
 import React, { useState } from "react";
-import { View, Text, TouchableOpacity, StyleSheet, Image, Dimensions } from "react-native";
+import {
+  View,
+  Text,
+  TouchableOpacity,
+  StyleSheet,
+  Image,
+  Dimensions,
+} from "react-native";
+import { useFonts } from "expo-font";
 
 const { height, width } = Dimensions.get("window"); // Get screen dimensions
 
@@ -9,6 +17,15 @@ interface SettingsProps {
 
 const Settings: React.FC<SettingsProps> = ({ onClose }) => {
   const [isDarkMode, setIsDarkMode] = useState(false);
+
+  const [fontsLoaded] = useFonts({
+    VT323: require("../assets/fonts/VT323-Regular.ttf"), // Ensure correct path
+  });
+
+  // Fallback for font loading
+  if (!fontsLoaded) {
+    return null;
+  }
 
   return (
     <View style={[styles.overlay, { height, width }]}>
@@ -59,7 +76,7 @@ const styles = StyleSheet.create({
     marginBottom: 20,
     color: "#f5eed5",
     textAlign: "center",
-    fontFamily: "VT323, serif",
+    fontFamily: "VT323", // Updated font usage
   },
   item: {
     flexDirection: "row",
@@ -71,7 +88,7 @@ const styles = StyleSheet.create({
   label: {
     fontSize: 16,
     color: "#f5eed5",
-    fontFamily: "VT323, serif",
+    fontFamily: "VT323", // Updated font usage
   },
   toggleImage: {
     width: 50,
@@ -88,6 +105,7 @@ const styles = StyleSheet.create({
   exitButtonText: {
     fontSize: 18,
     color: "#f5eed5",
+    fontFamily: "VT323", // Updated font usage
   },
 });
 

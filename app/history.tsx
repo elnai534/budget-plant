@@ -1,8 +1,18 @@
 import React from "react";
 import { View, Text, StyleSheet, Modal, TouchableOpacity } from "react-native";
+import { useFonts } from "expo-font"; // Import the useFonts hook
 import ScrollableHistory from "./components/History";
 
-const History = ({ onClose }: { onClose: () => void }) => {
+const History = ({ onClose }) => {
+  const [fontsLoaded] = useFonts({
+    VT323: require("../assets/fonts/VT323-Regular.ttf"), // Adjust path as necessary
+  });
+
+  // Fallback while fonts are loading
+  if (!fontsLoaded) {
+    return null;
+  }
+
   return (
     <Modal transparent={true} animationType="fade" visible={true}>
       <View style={styles.overlay}>
@@ -34,8 +44,6 @@ const styles = StyleSheet.create({
     borderColor: "#9083A5",
     borderRadius: 15,
     textAlign: "center",
-    fontFamily: "VT323, serif",
-    color: "#f5eed5",
     boxShadow: "0 4px 6px rgba(0, 0, 0, 0.2)", // Shadow is effective for iOS
   },
   header: {
@@ -43,6 +51,7 @@ const styles = StyleSheet.create({
     color: "#f5eed5",
     marginBottom: 20,
     textAlign: "center",
+    fontFamily: "VT323", // Apply custom font
   },
   closeButton: {
     marginTop: 20,
@@ -56,7 +65,7 @@ const styles = StyleSheet.create({
     justifyContent: "center",
   },
   closeButtonText: {
-    fontFamily: "VT323, serif",
+    fontFamily: "VT323", // Apply custom font
     fontSize: 20,
     color: "#FFFDED",
   },

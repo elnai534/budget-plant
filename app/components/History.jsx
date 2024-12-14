@@ -1,8 +1,18 @@
 import React from "react";
 import { View, Text, ScrollView, StyleSheet } from "react-native";
 import { useRecords } from "../components/recordsData"; // Import the hook
+import { useFonts } from "expo-font";
 
 const ScrollableHistory = () => {
+  const [fontsLoaded] = useFonts({
+    VT323: require("../../assets/fonts/VT323-Regular.ttf"),
+  });
+
+  // Ensure font is loaded before rendering
+  if (!fontsLoaded) {
+    return null; // Show nothing until the font is loaded
+  }
+
   const { records } = useRecords(); // Access the dynamic records state
 
   return (
@@ -55,24 +65,24 @@ const styles = StyleSheet.create({
   recordTitle: {
     fontSize: 24,
     color: "#FFFFFF",
-    fontFamily: "VT323, serif",
+    fontFamily: "VT323", // Removed `serif` as custom fonts don’t support fallbacks
   },
   recordAmount: {
     fontSize: 20,
-    fontFamily: "VT323, serif",
+    fontFamily: "VT323",
     marginTop: 5,
   },
   recordCategory: {
     fontSize: 16,
     color: "#888",
     marginTop: 5,
-    fontFamily: "VT323, serif",
+    fontFamily: "VT323",
   },
   recordDescription: {
     fontSize: 14,
     color: "#ccc",
     marginTop: 5,
-    fontFamily: "VT323, serif",
+    fontFamily: "VT323",
   },
 });
 

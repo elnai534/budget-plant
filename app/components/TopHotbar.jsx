@@ -1,11 +1,27 @@
 import React, { useState } from "react";
-import { Text, View, StyleSheet, Image, TouchableOpacity } from "react-native";
+import {
+  Text,
+  View,
+  StyleSheet,
+  Image,
+  TouchableOpacity,
+} from "react-native";
+import { useFonts } from "expo-font";
 import Settings from "../Settings"; // Import the Settings popup
 
 const TopHotbar = () => {
   const [isSettingsOpen, setIsSettingsOpen] = useState(false); // Track Settings popup state
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
   const [activeSection, setActiveSection] = useState("FAQ"); // Tracks which section is active (FAQ or Help)
+
+  const [fontsLoaded] = useFonts({
+    VT323: require("../../assets/fonts/VT323-Regular.ttf"), // Adjust path as necessary
+  });
+
+  // Ensure fonts are loaded before rendering
+  if (!fontsLoaded) {
+    return null;
+  }
 
   const toggleSidebar = () => {
     setIsSidebarOpen(!isSidebarOpen);
@@ -99,7 +115,7 @@ const styles = StyleSheet.create({
     marginBottom: "auto",
   },
   text: {
-    fontFamily: "VT323, serif",
+    fontFamily: "VT323", // Ensure font is applied
     fontSize: 36,
     fontWeight: "bold",
     color: "#f5eed5",
@@ -124,9 +140,9 @@ const styles = StyleSheet.create({
   sidebar: {
     position: "absolute",
     top: 0,
-    left: 1,
+    left: 0,
     width: 300,
-    height: 1277,
+    height: "100%",
     backgroundColor: "#4f455e",
     padding: 20,
     zIndex: 1000,
@@ -136,14 +152,14 @@ const styles = StyleSheet.create({
     fontWeight: "bold",
     color: "#f5eed5",
     marginBottom: 20,
-    fontFamily: "VT323, serif",
+    fontFamily: "VT323", // Ensure font is applied
   },
   sidebarItem: {
     fontSize: 20,
     color: "#f5eed5",
     fontWeight: "bold",
     marginBottom: 10,
-    fontFamily: "VT323, serif",
+    fontFamily: "VT323", // Ensure font is applied
   },
   closeButton: {
     position: "absolute",
@@ -153,6 +169,7 @@ const styles = StyleSheet.create({
   closeButtonText: {
     fontSize: 24,
     color: "#f5eed5",
+    fontFamily: "VT323", // Ensure font is applied
   },
   navButtons: {
     flexDirection: "row",
@@ -171,7 +188,7 @@ const styles = StyleSheet.create({
     color: "#f5eed5",
     fontSize: 24,
     fontWeight: "bold",
-    fontFamily: "VT323, serif",
+    fontFamily: "VT323", // Ensure font is applied
   },
 });
 

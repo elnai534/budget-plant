@@ -1,7 +1,57 @@
-import React from "react";
-import { View, Text, StyleSheet, Modal, Image, TouchableOpacity } from "react-native";
+import React, { useState, useEffect } from "react";
+import {
+  View,
+  Text,
+  StyleSheet,
+  Modal,
+  Image,
+  TouchableOpacity,
+  TextInput,
+  Alert,
+} from "react-native";
+import AsyncStorage from "@react-native-async-storage/async-storage";
+import { useFonts } from "expo-font";
 
-const Profile = ({ onClose }: { onClose: () => void }) => {
+const Profile = ({ onClose }) => {
+  const [budget, setBudget] = useState("");
+  const [fontsLoaded] = useFonts({
+    VT323: require("../assets/fonts/VT323-Regular.ttf"), // Ensure the correct font path
+  });
+
+  // Load saved budget when the modal is opened
+  useEffect(() => {
+    const loadBudget = async () => {
+      try {
+        const savedBudget = await AsyncStorage.getItem("userBudget");
+        if (savedBudget) {
+          setBudget(savedBudget); // Load saved budget into state
+        }
+      } catch (error) {
+        Alert.alert("Error", "Failed to load budget.");
+      }
+    };
+    loadBudget();
+  }, []);
+
+  // Save the budget to AsyncStorage
+  const saveBudget = async () => {
+    if (!budget || isNaN(parseFloat(budget))) {
+      Alert.alert("Error", "Please enter a valid numeric budget.");
+      return;
+    }
+    try {
+      await AsyncStorage.setItem("userBudget", budget);
+      Alert.alert("Success", "Budget saved successfully!");
+    } catch (error) {
+      Alert.alert("Error", "Failed to save budget.");
+    }
+  };
+
+  // Fallback while fonts are loading
+  if (!fontsLoaded) {
+    return null;
+  }
+
   return (
     <Modal transparent={true} animationType="fade" visible={true}>
       <View style={styles.overlay}>
@@ -15,15 +65,26 @@ const Profile = ({ onClose }: { onClose: () => void }) => {
           <Text style={styles.heading}>Profile</Text>
           <View style={styles.details}>
             <Text>
-              <Text style={styles.label}>Name:</Text> John Doe
+              <Text style={styles.label}>Name: John Doe</Text> 
             </Text>
             <Text>
-              <Text style={styles.label}>Email:</Text> john.doe@example.com
+              <Text style={styles.label}>Email: john.doe@example.com</Text>
             </Text>
             <Text>
-              <Text style={styles.label}>Joined:</Text> January 2024
+              <Text style={styles.label}>Joined: January 2024</Text>
             </Text>
           </View>
+          <TextInput
+            style={styles.input}
+            placeholder="Enter your budget"
+            placeholderTextColor="#a9a9a9"
+            keyboardType="numeric"
+            value={budget}
+            onChangeText={setBudget}
+          />
+          <TouchableOpacity style={styles.saveButton} onPress={saveBudget}>
+            <Text style={styles.saveButtonText}>Save Budget</Text>
+          </TouchableOpacity>
           <TouchableOpacity style={styles.closeButton} onPress={onClose}>
             <Text style={styles.closeButtonText}>Close</Text>
           </TouchableOpacity>
@@ -65,7 +126,7 @@ const styles = StyleSheet.create({
     fontSize: 24,
     color: "#f5eed5",
     textAlign: "center",
-    fontFamily: "VT323, serif",
+    fontFamily: "VT323", // Updated to apply the custom font
   },
   details: {
     textAlign: "center",
@@ -74,9 +135,37 @@ const styles = StyleSheet.create({
   label: {
     fontWeight: "bold",
     color: "#f5eed5",
+    fontFamily: "VT323", // Updated to apply the custom font
+  },
+  input: {
+    height: 40,
+    borderColor: "#FFFDED",
+    borderWidth: 1,
+    borderRadius: 5,
+    paddingHorizontal: 10,
+    marginBottom: 20,
+    width: "80%",
+    color: "#FFFDED",
+    backgroundColor: "#4A4452",
+    fontFamily: "VT323", // Updated to apply the custom font
+  },
+  saveButton: {
+    backgroundColor: "#57C785",
+    borderWidth: 2,
+    borderColor: "#9083A5",
+    paddingVertical: 10,
+    paddingHorizontal: 25,
+    borderRadius: 5,
+    alignItems: "center",
+    justifyContent: "center",
+    marginBottom: 10,
+  },
+  saveButtonText: {
+    fontFamily: "VT323", // Updated to apply the custom font
+    fontSize: 20,
+    color: "#FFFDED",
   },
   closeButton: {
-    marginTop: 20,
     backgroundColor: "#FFC0CB",
     borderWidth: 2,
     borderColor: "#9083A5",
@@ -87,7 +176,7 @@ const styles = StyleSheet.create({
     justifyContent: "center",
   },
   closeButtonText: {
-    fontFamily: "VT323, serif",
+    fontFamily: "VT323", // Updated to apply the custom font
     fontSize: 20,
     color: "#FFFDED",
   },
