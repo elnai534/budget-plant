@@ -153,7 +153,7 @@ const styles = StyleSheet.create({
     justifyContent: "space-between",
   },
   addButton: {
-    backgroundColor: "#AFE593",
+    backgroundColor: "#57C785",
     padding: 10,
     borderRadius: 5,
     borderWidth: 2,
