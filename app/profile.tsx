@@ -14,36 +14,48 @@ import { useFonts } from "expo-font";
 
 const Profile = ({ onClose }) => {
   const [budget, setBudget] = useState("");
+  const [name, setName] = useState(""); // State for Name
+  const [email, setEmail] = useState(""); // State for Email
   const [fontsLoaded] = useFonts({
     VT323: require("../assets/fonts/VT323-Regular.ttf"), // Ensure the correct font path
   });
 
-  // Load saved budget when the modal is opened
+  // Load saved data (budget, name, email) when the modal is opened
   useEffect(() => {
-    const loadBudget = async () => {
+    const loadData = async () => {
       try {
         const savedBudget = await AsyncStorage.getItem("userBudget");
-        if (savedBudget) {
-          setBudget(savedBudget); // Load saved budget into state
-        }
+        const savedName = await AsyncStorage.getItem("userName");
+        const savedEmail = await AsyncStorage.getItem("userEmail");
+
+        if (savedBudget) setBudget(savedBudget); // Load saved budget
+        if (savedName) setName(savedName); // Load saved name
+        if (savedEmail) setEmail(savedEmail); // Load saved email
       } catch (error) {
-        Alert.alert("Error", "Failed to load budget.");
+        Alert.alert("Error", "Failed to load user data.");
       }
     };
-    loadBudget();
+    loadData();
   }, []);
 
-  // Save the budget to AsyncStorage
-  const saveBudget = async () => {
+  // Save the budget, name, and email to AsyncStorage
+  const saveData = async () => {
     if (!budget || isNaN(parseFloat(budget))) {
       Alert.alert("Error", "Please enter a valid numeric budget.");
       return;
     }
+    if (!name || !email) {
+      Alert.alert("Error", "Please fill in all fields.");
+      return;
+    }
+
     try {
       await AsyncStorage.setItem("userBudget", budget);
-      Alert.alert("Success", "Budget saved successfully!");
+      await AsyncStorage.setItem("userName", name);
+      await AsyncStorage.setItem("userEmail", email);
+      Alert.alert("Success", "Profile updated successfully!");
     } catch (error) {
-      Alert.alert("Error", "Failed to save budget.");
+      Alert.alert("Error", "Failed to save profile data.");
     }
   };
 
@@ -63,17 +75,27 @@ const Profile = ({ onClose }) => {
             style={styles.profilePicture}
           />
           <Text style={styles.heading}>Profile</Text>
-          <View style={styles.details}>
-            <Text>
-              <Text style={styles.label}>Name: John Doe</Text> 
-            </Text>
-            <Text>
-              <Text style={styles.label}>Email: john.doe@example.com</Text>
-            </Text>
-            <Text>
-              <Text style={styles.label}>Joined: January 2024</Text>
-            </Text>
-          </View>
+
+          {/* Name Input */}
+          <TextInput
+            style={styles.input}
+            placeholder="Enter your name"
+            placeholderTextColor="#a9a9a9"
+            value={name}
+            onChangeText={setName}
+          />
+
+          {/* Email Input */}
+          <TextInput
+            style={styles.input}
+            placeholder="Enter your email"
+            placeholderTextColor="#a9a9a9"
+            keyboardType="email-address"
+            value={email}
+            onChangeText={setEmail}
+          />
+
+          {/* Budget Input */}
           <TextInput
             style={styles.input}
             placeholder="Enter your budget"
@@ -82,9 +104,13 @@ const Profile = ({ onClose }) => {
             value={budget}
             onChangeText={setBudget}
           />
-          <TouchableOpacity style={styles.saveButton} onPress={saveBudget}>
-            <Text style={styles.saveButtonText}>Save Budget</Text>
+
+          {/* Save Button */}
+          <TouchableOpacity style={styles.saveButton} onPress={saveData}>
+            <Text style={styles.saveButtonText}>Save Profile</Text>
           </TouchableOpacity>
+
+          {/* Close Button */}
           <TouchableOpacity style={styles.closeButton} onPress={onClose}>
             <Text style={styles.closeButtonText}>Close</Text>
           </TouchableOpacity>
@@ -126,15 +152,6 @@ const styles = StyleSheet.create({
     fontSize: 24,
     color: "#f5eed5",
     textAlign: "center",
-    fontFamily: "VT323", // Updated to apply the custom font
-  },
-  details: {
-    textAlign: "center",
-    marginBottom: 20,
-  },
-  label: {
-    fontWeight: "bold",
-    color: "#f5eed5",
     fontFamily: "VT323", // Updated to apply the custom font
   },
   input: {

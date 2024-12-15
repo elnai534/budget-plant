@@ -69,6 +69,9 @@ const styles = StyleSheet.create({
     justifyContent: "space-around", // Distribute buttons evenly
     alignItems: "center",
     padding: 20,
+    zIndex: 0,
+    position: "absolute",
+    bottom: 0,
      // Optional taskbar background color
   },
   button: {

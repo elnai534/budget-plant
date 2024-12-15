@@ -1,7 +1,7 @@
 import React from "react";
 import { View, Text, StyleSheet, Modal, TouchableOpacity } from "react-native";
 import { useFonts } from "expo-font"; // Import the useFonts hook
-import ScrollableHistory from "./components/History";
+import ScrollableHistory from "./components/FullHistory";
 
 const History = ({ onClose }) => {
   const [fontsLoaded] = useFonts({
@@ -17,7 +17,7 @@ const History = ({ onClose }) => {
     <Modal transparent={true} animationType="fade" visible={true}>
       <View style={styles.overlay}>
         <View style={styles.popup}>
-          <Text style={styles.header}>History</Text>
+          <Text style={styles.header}>Full History</Text>
           <ScrollableHistory />
           <TouchableOpacity style={styles.closeButton} onPress={onClose}>
             <Text style={styles.closeButtonText}>Close</Text>

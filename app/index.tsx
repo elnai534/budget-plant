@@ -11,11 +11,11 @@ export default function Index() {
     <RecordsProvider>
       <View style={styles.container}>
         <View style={styles.frame}>
-          <Taskbar />
-          <ScrollableHistory />
-          <TotalDisplay />
-          <PlantImage />
           <TopHotbar />
+          <PlantImage />
+          <TotalDisplay />
+          <ScrollableHistory />
+          <Taskbar />
         </View>
       </View>
     </RecordsProvider>
@@ -26,7 +26,7 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     alignItems: "center",
-    borderColor: "#000000",
+    backgroundColor: "#3E364A",
     width: "100%",
     height: "100%",
     margin: "auto",
@@ -34,12 +34,12 @@ const styles = StyleSheet.create({
 
   frame: {
     width: "100%",
-    height: "100%",
+    height: "90%",
     backgroundColor: "#3E364A",
-    borderWidth: 1,
-    borderColor: "#FFFFFF",
+  
     borderRadius: 10,
     alignItems: "center",
-    flexDirection: "column-reverse",
+    flexDirection: "column",
+    marginTop: "10%",
   },
 });

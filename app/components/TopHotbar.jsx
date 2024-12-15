@@ -1,11 +1,5 @@
 import React, { useState } from "react";
-import {
-  Text,
-  View,
-  StyleSheet,
-  Image,
-  TouchableOpacity,
-} from "react-native";
+import { Text, View, StyleSheet, Image, TouchableOpacity } from "react-native";
 import { useFonts } from "expo-font";
 import Settings from "../Settings"; // Import the Settings popup
 
@@ -32,25 +26,34 @@ const TopHotbar = () => {
   };
 
   return (
-    <View style={styles.container}>
-      {/* Hamburger Button */}
-      <TouchableOpacity onPress={toggleSidebar} style={styles.hamburgerTouchable}>
-        <Image
-          source={require("../../assets/images/hamburgericon.png")}
-          style={styles.hamburgericon}
-        />
-      </TouchableOpacity>
+    <>
+      {/* TopHotbar */}
+      <View style={styles.container}>
+        {/* Hamburger Button */}
+        <TouchableOpacity
+          onPress={toggleSidebar}
+          style={styles.hamburgerTouchable}
+        >
+          <Image
+            source={require("../../assets/images/hamburgericon.png")}
+            style={styles.hamburgericon}
+          />
+        </TouchableOpacity>
 
-      {/* Title */}
-      <Text style={styles.text}>BUDGET PLANT</Text>
+        {/* Title */}
+        <Text style={styles.text}>BUDGET PLANT</Text>
 
-      {/* Cogwheel Icon */}
-      <TouchableOpacity onPress={toggleSettings} style={styles.cogwheelTouchable}>
-        <Image
-          source={require("../../assets/images/cogwheel.png")}
-          style={styles.cogwheel}
-        />
-      </TouchableOpacity>
+        {/* Cogwheel Icon */}
+        <TouchableOpacity
+          onPress={toggleSettings}
+          style={styles.cogwheelTouchable}
+        >
+          <Image
+            source={require("../../assets/images/cogwheel.png")}
+            style={styles.cogwheel}
+          />
+        </TouchableOpacity>
+      </View>
 
       {/* Sidebar */}
       {isSidebarOpen && (
@@ -86,17 +89,29 @@ const TopHotbar = () => {
           {activeSection === "FAQ" && (
             <View>
               <Text style={styles.sidebarTitle}>FAQ</Text>
-              <Text style={styles.sidebarItem}>Question 1: Answer to question 1.</Text>
-              <Text style={styles.sidebarItem}>Question 2: Answer to question 2.</Text>
-              <Text style={styles.sidebarItem}>Question 3: Answer to question 3.</Text>
+              <Text style={styles.sidebarItem}>
+                Question 1: Answer to question 1.
+              </Text>
+              <Text style={styles.sidebarItem}>
+                Question 2: Answer to question 2.
+              </Text>
+              <Text style={styles.sidebarItem}>
+                Question 3: Answer to question 3.
+              </Text>
             </View>
           )}
           {activeSection === "Help" && (
             <View>
               <Text style={styles.sidebarTitle}>Help</Text>
-              <Text style={styles.sidebarItem}>Help Topic 1: Details about help topic 1.</Text>
-              <Text style={styles.sidebarItem}>Help Topic 2: Details about help topic 2.</Text>
-              <Text style={styles.sidebarItem}>Help Topic 3: Details about help topic 3.</Text>
+              <Text style={styles.sidebarItem}>
+                Help Topic 1: Details about help topic 1.
+              </Text>
+              <Text style={styles.sidebarItem}>
+                Help Topic 2: Details about help topic 2.
+              </Text>
+              <Text style={styles.sidebarItem}>
+                Help Topic 3: Details about help topic 3.
+              </Text>
             </View>
           )}
         </View>
@@ -104,7 +119,7 @@ const TopHotbar = () => {
 
       {/* Settings Popup */}
       {isSettingsOpen && <Settings onClose={() => setIsSettingsOpen(false)} />}
-    </View>
+    </>
   );
 };
 
@@ -112,10 +127,10 @@ const styles = StyleSheet.create({
   container: {
     width: "100%",
     alignItems: "center",
-    marginBottom: "25%",
+    marginBottom: "15%",
   },
   text: {
-    fontFamily: "VT323", 
+    fontFamily: "VT323",
     fontSize: 36,
     fontWeight: "bold",
     color: "#f5eed5",
@@ -142,7 +157,7 @@ const styles = StyleSheet.create({
     top: 0,
     left: 0,
     width: 300,
-    height: "100%",
+    height: "100%", // Ensure it takes the full height of the screen
     backgroundColor: "#4f455e",
     padding: 20,
     zIndex: 1000,
