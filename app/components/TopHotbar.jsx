@@ -112,10 +112,10 @@ const styles = StyleSheet.create({
   container: {
     width: "100%",
     alignItems: "center",
-    marginBottom: "auto",
+    marginBottom: "25%",
   },
   text: {
-    fontFamily: "VT323", // Ensure font is applied
+    fontFamily: "VT323", 
     fontSize: 36,
     fontWeight: "bold",
     color: "#f5eed5",

@@ -22,7 +22,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
 
   return (
     <View style={styles.container}>
-      <Stack />
+      <Stack screenOptions={{ headerShown: false }} /> {/* Hide the header */}
       {children}
     </View>
   );

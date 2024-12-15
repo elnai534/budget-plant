@@ -93,6 +93,7 @@ const styles = StyleSheet.create({
   toggleImage: {
     width: 50,
     height: 25,
+    marginTop: 8,
     resizeMode: "contain",
   },
   exitButton: {
