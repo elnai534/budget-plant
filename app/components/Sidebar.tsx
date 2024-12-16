@@ -49,7 +49,7 @@ const Sidebar = () => {
         <Text style={styles.sidebarHeader}>FAQ</Text>
         <View style={styles.sidebarContent}>
           <Text style={styles.sidebarItem}>
-            <Text style={styles.bold}>Question 1:</Text> Answer to question 1.
+            <Text style={styles.bold}>Question 1: How do I set or update my budget?</Text> Go to the Profile section, find the budget input field, enter your desired budget, and tap "Save Budget.
           </Text>
           <Text style={styles.sidebarItem}>
             <Text style={styles.bold}>Question 2:</Text> Answer to question 2.

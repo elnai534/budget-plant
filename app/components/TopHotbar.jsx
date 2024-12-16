@@ -90,13 +90,22 @@ const TopHotbar = () => {
             <View>
               <Text style={styles.sidebarTitle}>FAQ</Text>
               <Text style={styles.sidebarItem}>
-                Question 1: Answer to question 1.
+                Question 1: How do I set or update my budget?
+                </Text>
+                <Text style={styles.sidebarItem1}>
+                Go to the Profile section, find the budget input field, enter your desired budget, and tap "Save Profile".
               </Text>
               <Text style={styles.sidebarItem}>
-                Question 2: Answer to question 2.
+                Question 2:  How do I delete my budget data?
+              </Text>
+              <Text style={styles.sidebarItem1}>
+              You can delete your budget data by resetting the budget to zero in the Profile section or clearing the app data from your device settings.
               </Text>
               <Text style={styles.sidebarItem}>
-                Question 3: Answer to question 3.
+                Question 3: How is my data secured in this app?
+              </Text>
+              <Text style={styles.sidebarItem1}>
+              Your data is encrypted and stored securely on your device. We do not share your data with third parties without your consent.
               </Text>
             </View>
           )}
@@ -104,13 +113,22 @@ const TopHotbar = () => {
             <View>
               <Text style={styles.sidebarTitle}>Help</Text>
               <Text style={styles.sidebarItem}>
-                Help Topic 1: Details about help topic 1.
+                Help Topic 1: What to Do if the App Crashes
+              </Text>
+              <Text style={styles.sidebarItem1}>
+              If the app crashes, restart it. Ensure you’re using the latest version by checking the app store. If the issue persists, contact support at support@example.com.
               </Text>
               <Text style={styles.sidebarItem}>
-                Help Topic 2: Details about help topic 2.
+                Help Topic 2: Managing Notifications
+              </Text>
+              <Text style={styles.sidebarItem1}>
+                To manage notifications, go to the Settings section of the app. Enable or disable notifications based on your preferences.
               </Text>
               <Text style={styles.sidebarItem}>
-                Help Topic 3: Details about help topic 3.
+                Help Topic 3: Can I view a history of my budgets?
+              </Text>
+              <Text style={styles.sidebarItem1}>
+              Currently, budget history tracking is not available, but we’re working on adding this feature in future updates.
               </Text>
             </View>
           )}
@@ -170,6 +188,13 @@ const styles = StyleSheet.create({
     fontFamily: "VT323", // Ensure font is applied
   },
   sidebarItem: {
+    fontSize: 20,
+    color: "#fcb761",
+    fontWeight: "bold",
+    marginBottom: 10,
+    fontFamily: "VT323", // Ensure font is applied
+  },
+  sidebarItem1: {
     fontSize: 20,
     color: "#f5eed5",
     fontWeight: "bold",
