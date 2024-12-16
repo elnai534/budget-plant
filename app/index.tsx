@@ -1,7 +1,6 @@
 import { Text, View, StyleSheet, Image } from "react-native";
 import Taskbar from "./components/Taskbar";
 import ScrollableHistory from "./components/History";
-import PlantImage from "./components/Plant";
 import TopHotbar from "./components/TopHotbar";
 import TotalDisplay from "./components/TotalDisplay";
 import { RecordsProvider } from "./components/recordsData"; // Import the provider
@@ -12,7 +11,6 @@ export default function Index() {
       <View style={styles.container}>
         <View style={styles.frame}>
           <TopHotbar />
-          <PlantImage />
           <TotalDisplay />
           <ScrollableHistory />
           <Taskbar />

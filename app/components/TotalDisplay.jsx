@@ -1,17 +1,19 @@
 import React, { useEffect, useState } from "react";
-import { View, Text, StyleSheet, Alert } from "react-native";
-import { useRecords } from "./recordsData"; // Use the context hook
+import { View, Text, StyleSheet, Alert, Image } from "react-native";
+import { useRecords } from "./recordsData";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { useFonts } from "expo-font";
 
 const TotalDisplay = () => {
-  const { calculateTotalAmount } = useRecords(); // Access the function to calculate the total amount
-  const totalAmount = calculateTotalAmount(); // Dynamically calculate the total
+  const { calculateTotalAmount } = useRecords();
+  const totalAmount = calculateTotalAmount();
   const [budget, setBudget] = useState(null);
   const [distanceFromGoal, setDistanceFromGoal] = useState(null);
+  const [imageSource, setImageSource] = useState(null);
+  const [statusMessage, setStatusMessage] = useState("");
 
   const [fontsLoaded] = useFonts({
-    VT323: require("../../assets/fonts/VT323-Regular.ttf"), // Adjust the path as necessary
+    VT323: require("../../assets/fonts/VT323-Regular.ttf"),
   });
 
   // Load the budget from AsyncStorage
@@ -22,8 +24,6 @@ const TotalDisplay = () => {
         const budgetValue = parseFloat(savedBudget);
         if (!isNaN(budgetValue)) {
           setBudget(budgetValue);
-
-          // Calculate the distance from the budget goal
           const distance = Math.abs(budgetValue - totalAmount);
           setDistanceFromGoal(distance);
         } else {
@@ -43,27 +43,55 @@ const TotalDisplay = () => {
     loadBudget();
   }, []);
 
-  // Recalculate the distance whenever the total amount or budget changes
+  // Recalculate distance and determine image based on budget and total amount
   useEffect(() => {
     if (budget !== null) {
-      const distance = Math.abs(budget - totalAmount);
-      setDistanceFromGoal(distance);
-    }
-  }, [totalAmount, budget]);
+      const adjustedBudget = Number(budget) + Number(totalAmount);
+      const calculatedPercentage = (adjustedBudget / budget) * 100;
 
-  // Fallback while fonts are loading
+      // Determine the plant image and status message
+      if (calculatedPercentage >= 100) {
+        setImageSource(require("../../assets/images/flower.png"));
+        setStatusMessage("Your Flower is Blooming & Thriving and so is Your Budget!");
+      } else if (calculatedPercentage < 100 && calculatedPercentage >= 80) {
+        setImageSource(require("../../assets/images/leaf.png"));
+        setStatusMessage("Your Plant is in Good Condition! Keep it Healthy!");
+      } else if (calculatedPercentage < 80 && calculatedPercentage >= 50) {
+        setImageSource(require("../../assets/images/dyingleft1.png"));
+        setStatusMessage("Uh Oh! Your Plant and Budget are Starting to Look Bad!");
+      } else if (calculatedPercentage < 50 && calculatedPercentage >= 20) {
+        setImageSource(require("../../assets/images/dyingleef.png"));
+        setStatusMessage("Your Budget is Struggling and So is Your Plant!");
+      } else {
+        setImageSource(require("../../assets/images/dead.png"));
+        setStatusMessage("Things Aren't Looking Too Good! Your Plant Has Withered!");
+      }
+    }
+  }, [budget, totalAmount]);
+
   if (!fontsLoaded) {
     return null;
   }
 
   return (
     <View style={styles.container}>
+      {/* Image and Status Message */}
+      {imageSource && (
+        <View style={styles.imageContainer}>
+          <Image source={imageSource} style={styles.image} />
+          <Text style={styles.statusMessage}>{statusMessage}</Text>
+        </View>
+      )}
+      
+      {/* Net Balance */}
       <Text style={styles.text}>
         Net Balance:{" "}
         <Text style={[styles.text, { color: totalAmount < 0 ? "#FF6B6B" : "#4CAF50" }]}>
           ${totalAmount.toFixed(2)}
         </Text>
       </Text>
+
+      {/* Distance from Goal */}
       {budget === null ? (
         <Text style={styles.subtext}>
           No budget set. Please set a budget in your profile to track your goal.
@@ -92,15 +120,31 @@ const styles = StyleSheet.create({
     borderRadius: 10,
     alignItems: "center",
   },
+  imageContainer: {
+    alignItems: "center",
+    marginBottom: 20,
+  },
+  image: {
+    width: 200,
+    height: 250,
+    resizeMode: "contain",
+  },
+  statusMessage: {
+    marginTop: 10,
+    fontSize: 16,
+    color: "#f5eed5",
+    textAlign: "center",
+  },
   text: {
     fontSize: 36,
     color: "#f5eed5",
-    fontFamily: "VT323", // Ensure consistent font usage
+    fontFamily: "VT323",
+    marginTop: 10,
   },
   subtext: {
     fontSize: 20,
     color: "#f5eed5",
-    fontFamily: "VT323", // Ensure consistent font usage
+    fontFamily: "VT323",
     marginTop: 10,
     textAlign: "center",
   },
