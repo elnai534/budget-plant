@@ -58,7 +58,6 @@ const NewEntryPopup = ({ isOpen, onClose, addRecord }) => {
             <TextInput
               value={amount}
               onChangeText={setAmount}
-              keyboardType="numeric"
               style={styles.inputField}
             />
             <Text style={styles.label}>Category:</Text>
